@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="indstillinger.css">
+
+</head>
+<body>
+<div id=left>
+    <button onclick="location.href='index.html'">< -</button>
+    <h2>Indstillinger</h2>
+
+</div>
+<div id=middle>
+    <p>Sensitivitet Bevegelse</p>
+    <input type="range" min="1" max="100" value="50" class="slider" id="movementTrigSensitivity" oninput="this.nextElementSibling.value = this.value">
+    <output>50</output>
+    <p>Lengde Lys er tent efter forbipasserende</p>
+    <input type="range" min="1" max="100" value="5" class="slider" id="lightDuration" oninput="this.nextElementSibling.value = this.value">
+    <output>5</output>
+
+</div>
+<div id=right></div>
+
+
+</body>
+</html>

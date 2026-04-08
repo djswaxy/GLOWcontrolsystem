@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="forbipasserende.css">
+</head>
+<body>
+<button onclick="location.href='index.html'">< -</button>
+<h2>Forbipasserende</h2>
+
+<canvas id="myChart"></canvas>
+
+<h2>Annen statistikk:</h2>
+<div id="rawStats">
+    <p class="statTitles">Total antall Forbipasserende i dag:</p>
+    <p id="totalPassers"></p>
+    <p class="statTitles">Total antall Forbipasserende i uge:</p>
+    <p id="totalPassersWeek"></p>
+    <p class="statTitles">Mest aktive time:</p>
+    <p id="mostActiveHourValue"></p>
+    <p class="statTitles">Total passerende all tid:</p>
+    <p id="totalAllTime"></p>
+</div>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0">
+</script>
+<script src="forbipasserende.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(42,41,55);
+}
+html h2 {
+    color: white;
+}
+body button {
+    color: white;
+    border-radius: 15px;
+    border: 10px solid white;
+    background-color: transparent;
+    width: 100px;
+    height: 50px;
+}
+body button:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
