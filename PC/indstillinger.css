@@ -19,7 +19,10 @@ body {
     height: 100%;
     text-align: center;
 }
-body button {
+body p {
+    color: white;
+}
+#homebtn {
     color: white;
     border-radius: 15px;
     border: 10px solid white;
@@ -61,4 +64,11 @@ output {
     color: white;
     font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
+}
+#settingsIsConnected {
+    color: red;
+}
+.wide {
+    height: 50px;
+    width: 200px;
 }

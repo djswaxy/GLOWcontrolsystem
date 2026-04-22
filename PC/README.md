@@ -1,15 +1,16 @@
 # GLOWcontrolsystem
 
-**Required NPM Packages**
-```npm install ws```
+**Required NPM Packages**<br>
+*hvis du ikke er stor fan av npm, så rip*<br>
+```npm install node```<br>
+```npm install ws```<br>
 ```npm install serialport```
-+++
 
 **USER MANUAL**
-*1.* Find corresponding COM port for your machine by running ```node COMPORTFINDER.js```
-*2.* In global.js change the COM port to the one you found in step 1.
-*3.* Run ```node GLOWcontrolsystem.js```
-*4.* Open the browser and go to ```localhost:3000```
+*1.* Find corresponding COM port for your machine by running ```node COMPORTFINDER.js```<br>
+*2.* Run node global.js<br>
+*3.* Run ```node GLOWcontrolsystem.js```<br>
+*4.* Open the browser and go to ```localhost:6969```<br>
 *5.* Enjoy!
 
 <img width="2372" height="1247" alt="image" src="https://github.com/user-attachments/assets/bb519756-78ab-446a-af4b-0956a432c3f8" />

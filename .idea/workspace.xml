@@ -61,7 +61,6 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
@@ -78,9 +77,6 @@
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1777276815123" />
     <option name="spentUsd" value="0.00667575" />
-  </component>
-  <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="0" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
