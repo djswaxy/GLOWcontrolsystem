@@ -8,21 +8,25 @@
 </head>
 <body>
 <div id=left>
-    <button onclick="location.href='index.html'">< -</button>
+    <button id=homebtn onclick="location.href='index.html'">< -</button>
     <h2>Indstillinger</h2>
+    <p>SOCKET Connection:</p>
+    <p id="settingsIsConnected">Not Connected</p>
 
 </div>
 <div id=middle>
+    <button class="wide" id="fetchCurrentSettings"> --- FETCH CURRENT SETTINGS ---</button>
     <p>Sensitivitet Bevegelse</p>
     <input type="range" min="1" max="100" value="50" class="slider" id="movementTrigSensitivity" oninput="this.nextElementSibling.value = this.value">
     <output>50</output>
     <p>Lengde Lys er tent efter forbipasserende</p>
     <input type="range" min="1" max="100" value="5" class="slider" id="lightDuration" oninput="this.nextElementSibling.value = this.value">
     <output>5</output>
+    <button class=wide id="changeSettingBtn"> --- SUBMIT SETTING CHANGES ---</button>
 
 </div>
 <div id=right></div>
 
-
+<script src="indstillinger.js"></script>
 </body>
 </html>

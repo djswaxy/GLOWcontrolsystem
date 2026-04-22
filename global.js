@@ -1,52 +1,48 @@
-// eksempelkode for å sette opp UART, vi inkluderer denne script filen
-// i alle .html filer
-let WebSocketServer = require('ws').Server;
-const SERVER_PORT = 8081;               // port number for the webSocket server
-let wss = new WebSocketServer({port: SERVER_PORT}); // the webSocket server
-let connections = new Array;          // list of connections to the server
-wss.on('connection', handleConnection);
+const WebSocket = require('ws');
+const date = new Date();
+const hour = date.getHours();
+const minute = date.getMinutes();
+const second = date.getSeconds();
+const wss = new WebSocket.Server({ port: 6969 });
 
-function handleConnection(client) {
-    console.log("New Connection"); // you have a new client
-    connections.push(client); // add this client to the connections array
+const data = {
+    message: '0900-1000: 5 passed by'
+};
+const Last24HrStat = {
+    message: "00: 52, 01:24 ,02: 51, 03: 54"
+};
+wss.on('connection', function connection(ws) {
+    function Send24HrStat() {
+        const data = `${hour}:${minute}.${second} || Sent 24hr stat`;
+        ws.send(JSON.stringify(data));
+        ws.send(JSON.stringify(Last24HrStat));
+    }
+    function changeSetting(setting, value) {
 
-    client.on('message', sendToSerial); // when a client sends a message,
+        ws.send(JSON.stringify( `${hour}:${minute}.${second} ||`));
+        ws.send(JSON.stringify("Changed " + setting + " to " + value + ""));
+    }
 
-    client.on('close', function() { // when a client closes its connection
-        console.log("connection closed"); // print it out
-        let position = connections.indexOf(client); // get the client's position in the array
-        connections.splice(position, 1); // and delete it from the array
-    });
-}
 
-const isConnected = document.getElementById("isConnected");
-const SerialPortPath = 'COM5'
-const { SerialPort } = require('serialport');
-const comPort1 = new SerialPort({
-    path: 'COM4',
-    baudRate: 19200,
-    dataBits: 8,
-    stopBits: 1,
-    parity: 'none',
-});
-comPort1.on('open', () => {
-    console.log('Serial port opened');
-    isConnected.innerHTML = "Connected";
-    comPort1.write('Hello, UART!', (err) => {
-        if (err) {
-            return console.log('Error on write: ', err.message);
+    ws.on('message', function incoming(message) {
+        // Handle incoming message
+        console.log('\n[\x1b[32m MESSAGE RECIEVED\x1b[0m ] : %s', message);
+        if (message.toString() === '24hr') {
+            console.log('\n[ SENDING 24HR STAT --> ]');
+            Send24HrStat();
+
+        } else if (message.includes(':')) {
+
+            message = message.toString();
+            const [setting, value] = message.split(':');
+            console.log('\n[\x1b[33m--- DETECTED SETTING CHANGE ---\x1b[0m]\n' +
+                'Setting: ' + setting + '\n' + 'Value: ' + value);
+
+
         }
-        console.log('Message written');
+    });
+
+    ws.on('close', function() {
+        // Handle connection close
     });
 });
-
-comPort1.on('data', (data) => {
-    console.log('Data received: ', data.toString());
-});
-
-comPort1.on('error', (err) => {
-    console.log('Error: ', err.message);
-});
-
-
-// legg til data parsing her

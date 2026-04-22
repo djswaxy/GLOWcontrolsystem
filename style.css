@@ -6,6 +6,9 @@
     font-family: 'homme';
     src: url('Homme.ttf');
 }
+#isConnected {
+    color: red;
+}
 html {
     margin: 0;
     height: 100%;
@@ -29,6 +32,7 @@ body {
     flex-direction: column;
     text-align: center;
     align-items: center;
+    color: white;
 }
 #right {
     width: 33%;
