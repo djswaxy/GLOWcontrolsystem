@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PC/.idea/SEMESTERPROSJEKT LOCALHOST.iml" filepath="$PROJECT_DIR$/PC/.idea/SEMESTERPROSJEKT LOCALHOST.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SEMESTERPROSJEKT LOCALHOST.iml" filepath="$PROJECT_DIR$/.idea/SEMESTERPROSJEKT LOCALHOST.iml" />
     </modules>
   </component>
 </project>

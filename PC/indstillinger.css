@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'homebase';
-    src: url('homebase.ttf');
+    src: url('PC/homebase.ttf');
 }
 @font-face {
     font-family: 'homme';
-    src: url('Homme.ttf');
+    src: url('PC/Homme.ttf');
 }
 html {
     margin: 0;
