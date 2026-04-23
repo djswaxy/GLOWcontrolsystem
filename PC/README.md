@@ -1,5 +1,10 @@
 # GLOWcontrolsystem
 
+// TODO:
+* Implementer matte for Forbipasserende statistikk og graf
+* Implementer matte for Energibesparelse data
+* Gjør ferdig UART parsing og serialport 
+
 **Required NPM Packages**<br>
 *hvis du ikke er stor fan av npm, så rip*<br>
 ```npm install node```<br>
@@ -8,10 +13,9 @@
 
 **USER MANUAL**
 *1.* Find corresponding COM port for your machine by running ```node COMPORTFINDER.js```<br>
-*2.* Run node global.js<br>
-*3.* Run ```node GLOWcontrolsystem.js```<br>
-*4.* Open the browser and go to ```localhost:6969```<br>
-*5.* Enjoy!
+*2.* Run ```node PC/global.js```<br>
+*3.* Open the browser and go to ```localhost:6969```<br>
+*4.* Enjoy!
 
 <img width="2372" height="1247" alt="image" src="https://github.com/user-attachments/assets/bb519756-78ab-446a-af4b-0956a432c3f8" />
 <img width="2383" height="1373" alt="image" src="https://github.com/user-attachments/assets/5b080379-3d4b-4153-a3b6-cd65e833da0a" />

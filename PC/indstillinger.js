@@ -35,4 +35,4 @@ socket.onclose = function(event) {
 function sendMessage(message) {
     socket.send(message);
 }
-function changeSetting(setting, value) {sendMessage(setting + ':' + value)}
+function changeSetting(setting, value) {sendMessage(setting + ':::' + value)}
