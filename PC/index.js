@@ -26,4 +26,3 @@ socket.onclose = function(event) {
 function sendMessage(message) {
     socket.send(message);
 }
-function get24HrStat() {sendMessage('24hr')}

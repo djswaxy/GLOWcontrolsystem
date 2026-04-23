@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6db791fc-1eed-433a-aec0-e1bdedb136c4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Arduino/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Div/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/Forbipasserende.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Forbipasserende.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/PC/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/forbipasserende.css" beforeDir="false" afterPath="$PROJECT_DIR$/PC/forbipasserende.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/forbipasserende.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/forbipasserende.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/indstillinger.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/indstillinger.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +21,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="253" />
+    <option name="cachedIndexableFilesCount" value="32" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -61,6 +68,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "WEBSOCK",
     "ignore.virus.scanning.warn.message": "true",
     "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
@@ -105,6 +113,7 @@
       <workItem from="1776753580179" duration="9005000" />
       <workItem from="1776765207356" duration="2674000" />
       <workItem from="1776840659921" duration="296000" />
+      <workItem from="1776924922823" duration="2734000" />
     </task>
     <servers />
   </component>
