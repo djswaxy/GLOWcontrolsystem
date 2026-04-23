@@ -3,7 +3,8 @@
 // TODO:
 * Implementer matte for Forbipasserende statistikk og graf
 * Implementer matte for Energibesparelse data
-* Gjør ferdig UART parsing og serialport 
+* Gjør ferdig UART parsing og serialport
+<br>
 // DONE:
 * Logikk for Socket (Backend - Frontend kobling)
 * Boiler plate kode for grafer/indstillinger
