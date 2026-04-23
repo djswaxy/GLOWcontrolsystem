@@ -4,12 +4,7 @@
 * Implementer matte for Forbipasserende statistikk og graf
 * Implementer matte for Energibesparelse data
 * Gjør ferdig UART parsing og serialport
-<br>
-// DONE:
-* Logikk for Socket (Backend - Frontend kobling)
-* Boiler plate kode for grafer/indstillinger
-* Grundleggende UART connection
-  <br>
+
 **Required NPM Packages**<br>
 *hvis du ikke er stor fan av npm, så rip*<br>
 ```npm install node```<br>
