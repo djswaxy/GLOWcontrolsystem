@@ -6,6 +6,7 @@
 extern "C" {
 #endif
 
+#include "light.h"
 #include <avr/io.h>
 #include "uart.h"
 #include <avr/interrupt.h>
@@ -19,6 +20,7 @@ void TransmitData(unsigned char message_id, unsigned char data);
 // Receive Data
 void Receiver(unsigned char message_id);
 
+void ClearReceivedMessage();
 
 #ifdef __cplusplus
 }

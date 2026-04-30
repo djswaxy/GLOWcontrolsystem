@@ -1,7 +1,10 @@
 #include <Arduino.h>
+#include <communicationHandler.h>
 
-// put function declarations here:
-unsigned char lightStrength = 100;
+unsigned char lysStyrke;
+unsigned char lysTimer;
+
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -9,7 +12,7 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
 }
 
 // put function definitions here:
