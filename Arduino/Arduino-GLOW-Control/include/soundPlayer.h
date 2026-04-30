@@ -8,6 +8,10 @@
 #ifndef SOUNDPLAYER_H_
 #define SOUNDPLAYER_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <avr/io.h>
 #include "uart.h"
 #include <avr/interrupt.h>
@@ -25,5 +29,8 @@ void SendCommand(unsigned char* command); // Sends the created Packet as a comma
 void ClearReceiveBuffer(); // Clears all variables for receive buffer including array
 unsigned char WaitForAcknowledgment(); // Waits until SOMO-II is ready to receive command
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* SOUNDPLAYER_H_ */

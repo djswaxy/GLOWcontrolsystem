@@ -23,13 +23,16 @@ UART 0 initialization:
     Baud rate = 9600.
     Data bits = 8.
 *************************************************************************/
-void InitUART(uint32_t BaudRate, uint8_t DataBit)
+void InitUART0(unsigned long BaudRate, unsigned char DataBit, unsigned char Rx_Int)
 {
 	if (BaudRate < 300 || BaudRate > 115200){
 		return;
 	}
 	if (DataBit < 5 || DataBit > 8){
 		return;
+	}
+	if (Rx_Int){
+		UCSR0B = 1 << RXCIE0;
 	}
 	
 	unsigned int ubrrValue = (16000000 + (8L * BaudRate)) / (16L *BaudRate) - 1;
@@ -54,8 +57,8 @@ void InitUART(uint32_t BaudRate, uint8_t DataBit)
 	}
 
 	tempUCSR0B |= (1 << RXEN0) | (1 << TXEN0);
-	UCSR0B = tempUCSR0B;
-	UCSR0C = tempUCSR0C;
+	UCSR0B |= tempUCSR0B;
+	UCSR0C |= tempUCSR0C;
 }
 
 /*************************************************************************
@@ -112,7 +115,7 @@ Makes use of the C standard library <stdlib.h>.
 Parameter:
     Tal: The integer to be converted and sent. 
 *************************************************************************/
-void SendInteger(int16_t  Tal)
+void SendInteger(int  Tal)
 {   
 	char newNum[8];
 	itoa(Tal, newNum, 10);
