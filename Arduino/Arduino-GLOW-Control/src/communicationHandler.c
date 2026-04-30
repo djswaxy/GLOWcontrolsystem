@@ -40,8 +40,13 @@ void TransmitData(unsigned char message_id, unsigned char data) {
 
     for (int i = 0; i < 6; i++)
 	{
-		SendChar(message[i]);
+		//SendChar(message[i]);
+		SendInteger(message[i]);
 	}
+}
+
+void ForbiPasserende(){
+    TransmitData(0x02, 0x01);
 }
 
 void Receiver() {

@@ -16,9 +16,10 @@ void initCommunication();
 
 // Send Data
 void TransmitData(unsigned char message_id, unsigned char data);
+void ForbiPasserende();
 
 // Receive Data
-void Receiver(unsigned char message_id);
+void Receiver();
 
 void ClearReceivedMessage();
 

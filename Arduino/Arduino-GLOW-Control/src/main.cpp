@@ -6,18 +6,14 @@
 unsigned char lysStyrke;
 unsigned char lysTimer;
 
-
-
 void setup() {
   // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  InitUART0(9600, 6, 1);
+  initCommunication();
 }
 
 void loop() {
-  
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  _delay_ms(1000);
+  // put your main code here, to run repeatedly:
+  ForbiPasserende();
 }
