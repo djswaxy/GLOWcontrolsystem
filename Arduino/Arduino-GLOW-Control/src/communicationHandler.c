@@ -29,7 +29,19 @@ void initCommunication() {
 }
 
 void TransmitData(unsigned char message_id, unsigned char data) {
-    
+    unsigned char message[6];
+
+    message[0] = 0xAA; 
+    message[1] = message_id;
+    message[2] = data; 
+    message[3] = 0x00;
+    message[4] = 0x00;
+    message[5] = 0xBB;
+
+    for (int i = 0; i < 6; i++)
+	{
+		SendChar(message[i]);
+	}
 }
 
 void Receiver() {

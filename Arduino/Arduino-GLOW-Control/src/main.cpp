@@ -1,5 +1,7 @@
+#define F_CPU 16000000UL
 #include <Arduino.h>
 #include <communicationHandler.h>
+#include <util/delay.h>
 
 unsigned char lysStyrke;
 unsigned char lysTimer;
