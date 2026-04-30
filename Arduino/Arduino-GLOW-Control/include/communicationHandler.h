@@ -6,7 +6,8 @@
 extern "C" {
 #endif
 
-
+void initSound();
+void TransmitData();
 
 #ifdef __cplusplus
 }
