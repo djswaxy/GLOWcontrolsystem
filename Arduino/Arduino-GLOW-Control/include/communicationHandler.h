@@ -6,8 +6,19 @@
 extern "C" {
 #endif
 
-void initSound();
-void TransmitData();
+#include <avr/io.h>
+#include "uart.h"
+#include <avr/interrupt.h>
+
+// Initialize Communication
+void initCommunication();
+
+// Send Data
+void TransmitData(unsigned char message_id, unsigned char data);
+
+// Receive Data
+void Receiver(unsigned char message_id);
+
 
 #ifdef __cplusplus
 }
