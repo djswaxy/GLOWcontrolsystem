@@ -1,19 +1,48 @@
-#define F_CPU 16000000UL
-#include <Arduino.h>
-#include <communicationHandler.h>
-#include <util/delay.h>
+#include "LightSensor.h"
+#include "communicationHandler.h"
 
-unsigned char lysStyrke;
-unsigned char lysTimer;
+#define LED_PIN 4
+#define LUX_THRESHOLD 40.0
+
+LightSensor sensor;
+volatile bool interruptFired = false;
+
+void onLightInterrupt() {
+    interruptFired = true;
+}
 
 void setup() {
-  // put your setup code here, to run once:
-  InitUART0(9600, 6, 1);
-  initCommunication();
+    initCommunication();
+
+    pinMode(3, INPUT_PULLUP);
+    pinMode(LED_PIN, OUTPUT);
+
+    if (!sensor.init()) {
+        while(1);
+    }
+
+    sensor.setSensitivity(LUX_THRESHOLD);
+    sensor.enablePersistent();
+    sensor.clearInterrupt();
+
+    attachInterrupt(digitalPinToInterrupt(3), onLightInterrupt, CHANGE);
 }
 
 void loop() {
-  _delay_ms(1000);
-  // put your main code here, to run repeatedly:
-  ForbiPasserende();
+    sensor.printLuxLevels();
+
+    if (interruptFired) {
+        interruptFired = false;
+        sensor.clearInterrupt();
+
+        int lux = sensor.getLux();
+
+        if (lux >= 0 && lux < LUX_THRESHOLD) {
+            digitalWrite(LED_PIN, HIGH);
+        } else {
+            digitalWrite(LED_PIN, LOW);
+        }
+    }
+
+    delay(1500);
 }

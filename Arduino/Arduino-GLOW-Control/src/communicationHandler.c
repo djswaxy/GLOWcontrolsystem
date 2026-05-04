@@ -1,8 +1,6 @@
 
 #include "communicationHandler.h"
 
-
-
 volatile unsigned char received_bytes[6];
 volatile unsigned char rx_index = 0;
 volatile unsigned char packet_received = 0;
@@ -21,6 +19,7 @@ ISR(USART0_RX_vect) {
 		}
 	}
 }
+
 
 void initCommunication() {
     DDRE |= 0x00000010;

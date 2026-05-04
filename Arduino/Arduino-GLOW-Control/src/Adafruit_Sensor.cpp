@@ -6,6 +6,7 @@
 */
 /**************************************************************************/
 void Adafruit_Sensor::printSensorDetails(void) {
+#ifdef DEBUG_SERIAL
   sensor_t sensor;
   getSensor(&sensor);
   Serial.println(F("------------------------------------"));
@@ -117,4 +118,5 @@ void Adafruit_Sensor::printSensorDetails(void) {
   Serial.print(F("Resolution:   "));
   Serial.println(sensor.resolution);
   Serial.println(F("------------------------------------\n"));
+#endif
 }

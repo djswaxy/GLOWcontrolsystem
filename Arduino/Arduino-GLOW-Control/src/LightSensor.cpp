@@ -5,7 +5,6 @@ LightSensor::LightSensor()
 
 bool LightSensor::init() {
     if (!tsl_.begin()) {
-        Serial.println("TSL2591 ikke fundet — tjek wiring!");
         return false;
     }
 
@@ -43,10 +42,7 @@ int LightSensor::getLux() {
 }
 
 void LightSensor::printLuxLevels() {
-    Serial.print("Lux: ");
-    Serial.print(getLux());
-    Serial.print("  |  Threshold: ");
-    Serial.println(luxThreshold_);
+    (void)getLux();
 }
 
 void LightSensor::enablePersistent() {
