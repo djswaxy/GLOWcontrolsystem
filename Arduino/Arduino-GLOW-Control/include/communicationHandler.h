@@ -6,10 +6,10 @@
 extern "C" {
 #endif
 
-#include "light.h"
 #include <avr/io.h>
 #include "uart.h"
 #include <avr/interrupt.h>
+#include "led.h"
 
 // Initialize Communication
 void initCommunication();

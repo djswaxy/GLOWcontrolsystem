@@ -8,18 +8,22 @@ volatile unsigned char rx_index = 0;
 volatile unsigned char packet_received = 0;
 
 ISR(USART0_RX_vect) {
+    toggleLED(4);
+    //TransmitData(0x00, 0x01);
 	unsigned char data = UDR0;
 	if (rx_index == 0 && data != 0xAA) return;
 	
 	received_bytes[rx_index] = data;
 	rx_index++;
 	
-	if (rx_index >= 8) {
-		if (received_bytes[7] == 0xBB) {
+	/* if (rx_index >= 5) {
+		if (received_bytes[5] == 0xBB) {
 			
 			packet_received = 1;
 		}
-	}
+	} */
+    toggleLED(6);
+    TransmitData(0xFF, 0xFF);
 }
 
 void initCommunication() {
@@ -40,7 +44,6 @@ void TransmitData(unsigned char message_id, unsigned char data) {
 
     for (int i = 0; i < 6; i++)
 	{
-		//SendChar(message[i]);
 		SendInteger(message[i]);
 	}
 }
@@ -52,16 +55,14 @@ void ForbiPasserende(){
 void Receiver() {
     switch(received_bytes[1]){
         case 0x01:
-            setLight(received_bytes[2]);
             break;
         case 0x02:
-            setLight(received_bytes[2]);
             break;
     }
 }
 
 void ClearReceivedMessage(){
-    for (unsigned char i = 0; i < 8; i++) {
+    for (unsigned char i = 0; i < 6; i++) {
 	received_bytes[i] = 0;
 	}
 	rx_index = 0;
