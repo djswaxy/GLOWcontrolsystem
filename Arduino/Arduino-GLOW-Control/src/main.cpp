@@ -12,6 +12,8 @@ void setup() {
   initLEDport();
   InitUART0(9600, 8, 1);
   initCommunication();
+
+  toggleLED(5);
 }
 
 void loop() {

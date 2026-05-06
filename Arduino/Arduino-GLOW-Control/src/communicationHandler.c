@@ -18,14 +18,14 @@ ISR(USART0_RX_vect) {
         received_bytes[rx_index] = data;
         rx_index++;
     }
-	/* if (rx_index >= 5) {
+	if (rx_index >= 5) {
 		if (received_bytes[5] == 0xBB) {
-			
+			toggleLED(6);
 			packet_received = 1;
 		}
 
-	} */
-    toggleLED(6);
+	} 
+    
     TransmitData(0xFF, 0xFF);
 }
 
@@ -47,7 +47,7 @@ void TransmitData(unsigned char message_id, unsigned char data) {
 
     for (int i = 0; i < 6; i++)
 	{
-		SendInteger(message[i]);
+		SendChar(message[i]);
 	}
 }
 
