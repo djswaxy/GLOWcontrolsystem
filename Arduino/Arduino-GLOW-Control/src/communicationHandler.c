@@ -15,12 +15,16 @@ ISR(USART0_RX_vect) {
 	
 	received_bytes[rx_index] = data;
 	rx_index++;
-	
+	if (rx_index < 6) { // no overflow, added by djswaxy
+        received_bytes[rx_index] = data;
+        rx_index++;
+    }
 	/* if (rx_index >= 5) {
 		if (received_bytes[5] == 0xBB) {
 			
 			packet_received = 1;
 		}
+
 	} */
     toggleLED(6);
     TransmitData(0xFF, 0xFF);
@@ -28,7 +32,7 @@ ISR(USART0_RX_vect) {
 
 void initCommunication() {
     DDRE |= 0b00000010;
-	DDRE &= 0b11111110;
+	DDRE &= 0b11111110; //changed to byte from hex, added by djswaxy
 	sei();
 }
 
