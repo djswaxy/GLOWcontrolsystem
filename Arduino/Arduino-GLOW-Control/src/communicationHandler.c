@@ -13,8 +13,7 @@ ISR(USART0_RX_vect) {
 	unsigned char data = UDR0;
 	if (rx_index == 0 && data != 0xAA) return;
 	
-	received_bytes[rx_index] = data;
-	rx_index++;
+	
 	if (rx_index < 6) { // no overflow, added by djswaxy
         received_bytes[rx_index] = data;
         rx_index++;
