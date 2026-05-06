@@ -27,8 +27,8 @@ ISR(USART0_RX_vect) {
 }
 
 void initCommunication() {
-    DDRE |= 0x00000010;
-	DDRE &= 0x11111110;
+    DDRE |= 0b00000010;
+	DDRE &= 0b11111110;
 	sei();
 }
 
