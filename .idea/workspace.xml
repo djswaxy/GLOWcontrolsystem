@@ -8,6 +8,7 @@
       <change afterPath="$PROJECT_DIR$/PC/Energibesparelse.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/PC/Energibesparelse.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Energibesparelse.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/scripty.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/stylegraphpage.css" beforeDir="false" afterPath="$PROJECT_DIR$/PC/stylegraphpage.css" afterDir="false" />
@@ -23,6 +24,8 @@
       <change beforePath="$PROJECT_DIR$/PC/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/PC/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/PC/package.json" afterDir="false" />
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +33,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
+<<<<<<< Updated upstream
     <option name="cachedIndexableFilesCount" value="37" />
+=======
+    <option name="cachedIndexableFilesCount" value="55" />
+>>>>>>> Stashed changes
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -106,7 +113,11 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+<<<<<<< Updated upstream
     "git-widget-placeholder": "main",
+=======
+    "git-widget-placeholder": "arduino",
+>>>>>>> Stashed changes
     "ignore.virus.scanning.warn.message": "true",
     "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
@@ -124,12 +135,19 @@
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1779868909602" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <option name="spentUsd" value="0.00379905" />
   </component>
   <component name="RecapUselessUpdatesCounter">
     <option name="suspendCountdown" value="8" />
 =======
     <option name="spentUsd" value="0.002518" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="7" />
+>>>>>>> Stashed changes
+=======
+    <option name="spentUsd" value="0.0444955" />
   </component>
   <component name="RecapUselessUpdatesCounter">
     <option name="suspendCountdown" value="7" />
