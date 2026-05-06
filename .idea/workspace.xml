@@ -5,15 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6db791fc-1eed-433a-aec0-e1bdedb136c4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/PC/Energibesparelse.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+      <change beforePath="$PROJECT_DIR$/PC/Energibesparelse.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Energibesparelse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/scripty.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/stylegraphpage.css" beforeDir="false" afterPath="$PROJECT_DIR$/PC/stylegraphpage.css" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/PC/Forbipasserende.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Forbipasserende.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PC/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/PC/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/Indstillinger.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Indstillinger.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/forbipasserende.css" beforeDir="false" afterPath="$PROJECT_DIR$/PC/forbipasserende.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PC/forbipasserende.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/forbipasserende.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/global.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PC/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/indstillinger.css" beforeDir="false" afterPath="$PROJECT_DIR$/PC/indstillinger.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/indstillinger.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/indstillinger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/PC/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/PC/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/PC/package.json" afterDir="false" />
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +33,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="32" />
+<<<<<<< Updated upstream
+    <option name="cachedIndexableFilesCount" value="37" />
+=======
+    <option name="cachedIndexableFilesCount" value="55" />
+>>>>>>> Stashed changes
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -53,6 +69,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.Energibesparelse.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Forbipasserende.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.Indstillinger.html.executor&quot;: &quot;Debug&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.global.js.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;WEBSOCK&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/emilo/Documents/GitHub/GLOWcontrolsystem/Arduino&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+=======
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
@@ -68,7 +113,11 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "WEBSOCK",
+<<<<<<< Updated upstream
+    "git-widget-placeholder": "main",
+=======
+    "git-widget-placeholder": "arduino",
+>>>>>>> Stashed changes
     "ignore.virus.scanning.warn.message": "true",
     "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
@@ -80,16 +129,44 @@
     "nodejs_package_manager_path": "npm",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
+>>>>>>> Stashed changes
   }
-}]]></component>
+}</component>
   <component name="RecapSpentCounter">
-    <option name="endsOfQuotaMs" value="1777276815123" />
-    <option name="spentUsd" value="0.00667575" />
+    <option name="endsOfQuotaMs" value="1779868909602" />
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+    <option name="spentUsd" value="0.00379905" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="8" />
+=======
+    <option name="spentUsd" value="0.002518" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="7" />
+>>>>>>> Stashed changes
+=======
+    <option name="spentUsd" value="0.0444955" />
+  </component>
+  <component name="RecapUselessUpdatesCounter">
+    <option name="suspendCountdown" value="7" />
+>>>>>>> Stashed changes
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\emilo\Documents\GitHub\GLOWcontrolsystem" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/GLOWcontrolsystem/PC/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -113,7 +190,11 @@
       <workItem from="1776753580179" duration="9005000" />
       <workItem from="1776765207356" duration="2674000" />
       <workItem from="1776840659921" duration="296000" />
-      <workItem from="1776924922823" duration="2734000" />
+      <workItem from="1776924922823" duration="3614000" />
+      <workItem from="1776938461916" duration="1093000" />
+      <workItem from="1777362797224" duration="43000" />
+      <workItem from="1777453312737" duration="853000" />
+      <workItem from="1777889477695" duration="90000" />
     </task>
     <servers />
   </component>

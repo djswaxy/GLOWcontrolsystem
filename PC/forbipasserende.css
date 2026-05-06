@@ -54,3 +54,6 @@ body h2 {
 .statTitles {
     font-weight: bold;
 }
+#isConnectedForbiPasserende {
+    color: red;
+}

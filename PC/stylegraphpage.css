@@ -4,7 +4,15 @@ body {
 html h2 {
     color: white;
 }
-body button {
+#refreshEnergybtn {
+    color: white;
+    border-radius: 15px;
+    border: 10px solid white;
+    background-color: transparent;
+    width: 200px;
+    height: 50px;
+}
+#homeEnergybtn {
     color: white;
     border-radius: 15px;
     border: 10px solid white;
@@ -12,8 +20,22 @@ body button {
     width: 100px;
     height: 50px;
 }
-body button:hover {
+#buttonbox button:hover {
     background-color: white;
     color: black;
     cursor: pointer;
+}
+#titleBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+}
+#buttonbox {
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+.marginme {
+    margin: 10px;
 }

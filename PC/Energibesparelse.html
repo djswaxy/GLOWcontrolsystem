@@ -6,8 +6,18 @@
     <link rel="stylesheet" href="stylegraphpage.css">
 </head>
 <body>
-<button onclick="location.href='index.html'">< -</button>
-<h2>Energibesparelse</h2>
+<div id="buttonbox">
+    <button id=homeEnergybtn onclick="location.href='index.html'">< -</button>
+    <button id=refreshEnergybtn onclick="getEnergyStat()">Refresh Energy Stats</button>
+    <p class="marginme">SOCKET Connection:</p>
+    <p class=marginme id="EnergiIsConnected">not connected</p>
+</div>
+
+<div id="titleBox">
+    <h2 class="marginme">Energibesparelse</h2>
+
+</div>
+
 
 <canvas id="myChart"></canvas>
 
@@ -15,6 +25,7 @@
 <script
         src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0">
 </script>
-<script src="scripty.js"></script>
+<script src="Energibesparelse.js"></script>
+
 </body>
 </html>

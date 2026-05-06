@@ -1,3 +1,7 @@
+EnergiIsConnected = document.getElementById("EnergiIsConnected");
+const socket = new WebSocket('ws://localhost:6969');
+
+
 const yValues = [55, 49, 44, 24, 15];
 const regValues = [124, 89, 92, 124, 100];
 const xLabels = [1, 2, 3, 4, 5]; // Repræsentant for "Tid i timer"
@@ -47,3 +51,14 @@ new Chart(myChart, {
         }
     }
 });
+socket.onopen = function(event) {
+    // Handle connection open
+
+    EnergiIsConnected.style.color = 'green';
+    EnergiIsConnected.innerText = `Connected`;
+
+};
+function sendMessage(message) {
+    socket.send(message);
+}
+function getEnergyStat() {sendMessage('EnergyStat')}
