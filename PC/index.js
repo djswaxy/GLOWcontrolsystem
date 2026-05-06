@@ -26,3 +26,6 @@ socket.onclose = function(event) {
 function sendMessage(message) {
     socket.send(message);
 }
+function simulateUART() {
+    socket.send("UARTIncoming: Uart Simulated")
+}

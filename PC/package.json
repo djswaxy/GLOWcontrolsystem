@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@serialport/parser-readline": "^13.0.0",
     "node": "^25.9.0",
     "serialport": "^13.0.0",
     "ws": "^8.20.0"
