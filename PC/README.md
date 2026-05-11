@@ -1,9 +1,8 @@
 # GLOWcontrolsystem
 
-// TODO:
-* Implementer matte for Forbipasserende statistikk og graf
-* Implementer matte for Energibesparelse data
-* Gjør ferdig UART parsing og serialport
+// LØPENDE TODO:
+* enten implementer 12/24  
+* WEBsocket send 24hr stat fra backend handle24HrSensorData(packet) -> frontend
 
 **Required NPM Packages**<br>
 *hvis du ikke er stor fan av npm, så rip*<br>
