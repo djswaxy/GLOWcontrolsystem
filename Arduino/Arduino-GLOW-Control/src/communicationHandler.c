@@ -3,6 +3,7 @@
 
 
 
+
 volatile unsigned char received_bytes[6];
 volatile unsigned char rx_index = 0;
 volatile unsigned char packet_received = 0;
@@ -35,24 +36,20 @@ void initCommunication() {
 	sei();
 }
 
-void TransmitData(unsigned char message_id, unsigned char data) {
+void TransmitData(unsigned char message_id, unsigned char* data) {
     unsigned char message[6];
 
     message[0] = 0xAA; 
     message[1] = message_id;
-    message[2] = data; 
-    message[3] = 0x00;
-    message[4] = 0x00;
+    message[2] = data[0]; 
+    message[3] = data[1];
+    message[4] = data[2];
     message[5] = 0xBB;
 
     for (int i = 0; i < 6; i++)
 	{
 		SendChar(message[i]);
 	}
-}
-
-void ForbiPasserende(){
-    TransmitData(0x02, 0x01);
 }
 
 void Receiver() {

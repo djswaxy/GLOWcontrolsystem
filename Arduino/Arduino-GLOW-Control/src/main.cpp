@@ -7,6 +7,11 @@
 
 unsigned char lysStyrke;
 unsigned char lysTimer;
+// Messages
+struct {
+  unsigned char ID = 0xCC;
+  unsigned char DATA[3] = {0xCC, 0xCC, 0xCC};
+} connectToPC;
 
 void setup() {
   initLEDport();
@@ -18,6 +23,7 @@ void setup() {
 
 void loop() {
   _delay_ms(1000);
+  TransmitData(connectToPC.ID, connectToPC.DATA);
   toggleLED(0);
   //ForbiPasserende();
 }

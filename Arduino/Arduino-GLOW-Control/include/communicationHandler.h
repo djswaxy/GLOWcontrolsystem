@@ -15,8 +15,7 @@ extern "C" {
 void initCommunication();
 
 // Send Data
-void TransmitData(unsigned char message_id, unsigned char data);
-void ForbiPasserende();
+void TransmitData(unsigned char message_id, unsigned char* data);
 
 // Receive Data
 void Receiver();
