@@ -23,6 +23,24 @@ data data data indicates bytes reserved for sending actual data, a setting, a va
 | Adjusted Settings  | 0xAA 0xAC *data data data* 0xBB |
 | General Acknowledge  | 0xAA 0xEE 0xEE 0xEE 0xEE 0xBB  |
 
+SUB TABELL FOR ADJUSTED SETTING RESPONSE [ARDUINO -> PC]
+**BOLD** er i disse brugt til switch statements, det er veldig viktig at de bytes er korrekte
+| Adjusted Settings!  | Bytes |
+|----------|-------|
+| Adjusted Mvmnt Sens + Light Duration by X and Y | 0xAA 0xAC **0x00** 0x(X) 0x(Y) 0xBB |
+| Adjusted Mvmnt Trig Alone by X   | 0xAA 0xAC **0x01** 0x(X) 0x00 0xBB |
+| Adjusted Light Duration Alone by X  | 0xAA 0xAC **0x02** 0x(X) 0x00 0xBB |
+
+SUB TABELL FOR SENDING 24HR SETTING [ARDUINO -> PC]
+**BOLD** er i disse brugt til switch statements, det er veldig viktig at de bytes er korrekte
+| 24HR SENSOR DATA  | Bytes |
+|----------|-------|
+| Passerby's Today, amount(X) | 0xAA 0xAB **0x00** 0x(X) 0x00 0xBB |
+| Passerby's Most Active Hour(X), amount(Y) | 0xAA 0xAB **0x01** 0x(X) 0x(Y) 0xBB |
+| Passerby's Week, Amount(X)   | 0xAA 0xAC **0x02** 0x(X) 0x00 0xBB |
+| Passerby's All Time, Amount(X)  | 0xAA 0xAC **0x03** 0x(X) 0x00 0xBB |
+
+
 *commands from PC -> to Arduino*
 | Command from PC  | Bytes |
 |----------|-------|
