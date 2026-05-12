@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6db791fc-1eed-433a-aec0-e1bdedb136c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/datasheet.md" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/datasheet.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PC/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/PC/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/communicationHandler.c" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/communicationHandler.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/node_modules/@serialport/stream/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/node_modules/@serialport/stream/dist/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="56" />
+    <option name="cachedIndexableFilesCount" value="62" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -48,41 +49,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;JavaScript Debug.Energibesparelse.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Forbipasserende.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.Indstillinger.html.executor&quot;: &quot;Debug&quot;,
-    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Debug&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Node.js.global.js.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;arduino&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/emilo/Documents/GitHub/GLOWcontrolsystem/Arduino&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.Energibesparelse.html.executor": "Debug",
+    "JavaScript Debug.Forbipasserende.html.executor": "Debug",
+    "JavaScript Debug.Indstillinger.html.executor": "Debug",
+    "JavaScript Debug.index.html.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.global.js.executor": "Debug",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "arduino",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/emilo/Documents/GitHub/GLOWcontrolsystem/Arduino",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Users\\emilo\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1779868909602" />
-    <option name="spentUsd" value="0.016559001" />
+    <option name="spentUsd" value="0.06368451" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="4" />
+    <option name="suspendCountdown" value="1" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -113,7 +115,7 @@
       <workItem from="1776840659921" duration="296000" />
       <workItem from="1776924922823" duration="2734000" />
       <workItem from="1778159503586" duration="244000" />
-      <workItem from="1778487294705" duration="6651000" />
+      <workItem from="1778487294705" duration="16187000" />
     </task>
     <servers />
   </component>

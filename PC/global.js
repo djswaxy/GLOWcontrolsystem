@@ -1,68 +1,119 @@
 const WebSocket = require('ws');
 const { SerialPort } = require('serialport');
 
-const Acknowledge = new Uint8Array([0xAA, 0xEE, 0xEE, 0xEE, 0xEE, 0xBB]);
+
+const ConnAcknowledge = new Uint8Array([0xAA, 0xEE, 0xEE, 0xEE, 0xEE, 0xBB]);
+const AskForSensorData = new Uint8Array([0xAA, 0xAB, 0x00, 0x00, 0x00, 0xBB]);
 const myBytes = new Uint8Array([0xAA, 0x01, 0x55, 0xFF, 0x0A, 0xBB]);
 
+function sendPacket(packetArray) { // alternativ instant packet sender
+    const buffer = Buffer.from(packetArray);
+    port.write(buffer, (err) => {
+        if (err) console.error('Feil ved sending:', err.message);
+    });
+    console.log(`Sendte pakke: 0x${buffer.toString('hex').toUpperCase()}`);
+}
+function changeSetting(setting, value) {
+    let settingP = 0x00;
+    if(setting === "movementTrigSensitivity") {
+        settingP = 0x01
+    }
+    if(setting === "lightDuration") {
+        settingP = 0x02;
+    }
+    if(setting === "maxLightStrength") {
+        settingP = 0x03;
+    }
+    if(setting === "standbyLightStrength") {
+        settingP = 0x04;
+    }
+    const settingChangePacket = new Uint8Array([0xAA, 0xAC, settingP, value, 0xFF, 0xBB]);
+    sendPacket(settingChangePacket);
+}
+
+
 const port = new SerialPort({
-    path: 'COM8', // Husk å sjekke at dette er riktig port
+    path: 'COM3', // Husk å sjekke at dette er riktig port
     baudRate: 9600
 });
-async function HandleIncomingPacket(packet) {
+async function handleIncomingPacket(packet) {
     const hexString = Buffer.from(packet).toString('hex').toUpperCase();
     const formattedHex = hexString.match(/.{1,2}/g).join(' ');
     // blir på formen AA -- -- -- -- BB ingen 0x foran i formattedHex
-    console.log(`[KOMPLETT PAKKE]: 0x${formattedHex}`);
+    console.log(`\x1b[95m[-> MOTATT KOMPLETT PAKKE]: 0x${formattedHex}\x1b[0m`);
     const messageType = packet[1]; // byte nummer 2 etter 0xAA
 
-    const hexLog = Buffer.from(packet).toString('hex').toUpperCase(); //log
-    console.log(`[MOTTATT]: ${hexLog}`);
+    /*const hexLog = Buffer.from(packet).toString('hex').toUpperCase(); //log
+    console.log(`[MOTTATT]: ${hexLog}`);*/
 
     switch(messageType) {
         case 0xAC: // arduino svar på endre setting kommando
-            if(packet[2] === 0x00) {
-                console.log("Endring av setting er vellykket!");
-                if(packet[3] === 0x00) {
-                    console.log("Movement Trig Sensitivity: " + packet[4]);
-                    console.log("Light Duration: " + packet[5]);
-                } else if(packet[3] === 0x01) {
-                    console.log("Movement Trig Sensitivity: " + packet[4]);
-                } else if(packet[3] === 0x02) {
-                    console.log("Light Duration: " + packet[4]);
-                } else console.log("Ukjent setting endring")
-            } else {
-                console.log("Endring av setting feilet!");
-            }
+            await handleSettingChangeResponse(packet);
             break;
 
-        case 0xAB: // 24t sensor data
+        case 0xAB: //
             await handle24HrSensorData(packet);
             break;
         case 0xCC: //koble til Arduino
             await handleConnection();
             break;
-        case 0xEE: //koble til Arduino
+        case 0xEE: //
             console.log("General Acknowledgement from Arduino");
             break;
 
     }
 }
+function handleSettingChangeResponse(packet) {
+    if(packet[2] === 0x00) {
+        /*
+        console.log("Movement Trig Sensitivity: ", packet[3])
+        console.log("Light Duration: ", packet[4]);*/
+        console.log(`${Colors.lightBlue} PLEASE IMPLEMENT ALL SETTING CHANGE, nothing has been recieved${Colors.reset}`)
+
+    }
+    if(packet[2] === 0x01) {
+        console.log("Confirmed Change Movement Trig Sensitivity to: ", packet[3]);
+    }
+    if(packet[2] === 0x02) {
+        console.log("Confirmed Change Light Duration to: ", packet[3]);
+    }
+    if(packet[2] === 0x03) {
+        console.log("Confirmed Change Max Light Strength to: ", packet[3]);
+    }
+    if(packet[2] === 0x03) {
+        console.log("Confirmed Change Standby Light Strength to: ", packet[3]);
+    }
+
+}
 function handle24HrSensorData(packet) {
     if(packet[2] === 0x00) { //passerby today
         // websocket send to Energibesparelse
+        console.log("24t Sensor : Passerby's today: ", packet[3]);
     }
     if(packet[2] === 0x01) { //passerby most active hour
         // websocket send to Energibesparelse
+        console.log("24t Sensor : Most Active Hour | HOUR: ", packet[3], " | PASSERBY's: ", packet[4]);
     }
     if(packet[2] === 0x02) { //passerbys week
         // websocket send to Energibesparelse
+        console.log("24t Sensor : Passerby's Week ", packet[3]);
     }
     if(packet[2] === 0x03) { //passerbys all time
         // websocket send to Energibesparelse
+        // packet 3 = high byte, packet 4 = low byte
+        const highByte = packet[3];
+        const lowByte = packet[4];
+        const totalValue = (highByte << 8) | lowByte;
+        console.log("24t Sensor : Passerby's All Time ", totalValue);
+
     }
 }
 function handleConnection() {
-
+        // send tilbake connection til Arduino
+        console.log("CONNECTION Request from ARDUINO");
+        sendBytesEnAvGangen(ConnAcknowledge);
+       // sendBytesEnAvGangen(Acknowledge);
+       // console.log("-ACKNOWLEDGEMENT SENT-");
 }
 
 // 1. Listen med de 6 bytene du vil sende (bytt ut med dine egne hex-verdier)
@@ -120,57 +171,15 @@ port.on('data', (data) => {
     }
 });
 
-port.on('data', (data) => {
 
-
-    // 2. Fortsett å sjekke så lenge vi har minst 6 bytes i boksen
-    while (rxBuffer.length >= 6) {
-
-
-
-        // 4. Vi har funnet 0xAA! La oss hente ut en pakke på 6 bytes
-        const packet = rxBuffer.splice(0, 6);
-
-        // 5. Sjekk at den siste byten faktisk er 0xBB
-        if (packet[5] === 0xBB) {
-            // Suksess! Gjør det om til en fin hex-streng
-
-            if (formattedHex === 'AA CC CC CC CC BB') {
-                // --- HER SETTER VI INN LOGIKKEN ---
-                if (isSending) {
-                    console.log("Opptatt: Allerede i ferd med å sende data. Ignorerer forespørsel.");
-                } else {
-                    console.log("Mottatt Connection Request fra Arduino, venter 1s...");
-
-                    // Vi bruker en async-funksjon inne i setTimeout for å håndtere await
-                    setTimeout(async () => {
-                        isSending = true; // Lås for andre forespørsler
-                        console.log("Sending Acknowledgement...");
-
-                        await sendBytesEnAvGangen(Acknowledge);
-
-                        isSending = false; // Lås opp igjen når funksjonen er helt ferdig
-                        console.log("Klar for nye oppdrag.");
-                    }, 1000);
-                }
-                // ----------------------------------
-            }
-            console.log('-----------------------------------');
-        } else {
-            console.log('[FEIL]: Fikk 6 bytes, men sluttet ikke på 0xBB. Kaster pakken.');
-        }
-    }
-});
 // 4. Vent til porten er åpen, og start funksjonen
 port.on('open', () => {
     console.log('Port opened successfully!');
-    setTimeout(async () => {
-        if (!isSending) {
-            isSending = true;
-            await sendBytesEnAvGangen(Acknowledge);
-            isSending = false;
-        }
-    }, 2500);
+    delay(1000);
+    changeSetting("movementTrigSensitivity", 10);
+    delay(1000);
+    changeSetting("lightDuration", 24);
+
 });
 
 port.on('error', (err) => {
@@ -210,3 +219,30 @@ wss.on('connection', function connection(ws) {
         console.log("\x1b[31m\n[CONNECTION CLOSED]\033[0m");
     });
 });
+const Colors = {
+    // Text Colors
+    reset: "\x1b[0m",
+    bright: "\x1b[1m",
+    dim: "\x1b[2m",
+
+    black: "\x1b[30m",
+    red: "\x1b[31m",
+    green: "\x1b[32m",
+    yellow: "\x1b[33m",
+    blue: "\x1b[34m",
+    magenta: "\x1b[35m", // This is your Pink
+    cyan: "\x1b[36m",
+    white: "\x1b[37m",
+
+    // High Intensity (Brighter)
+    pink: "\x1b[95m",
+    orange: "\x1b[38;5;208m", // Using 256-color palette for Orange
+    lightBlue: "\x1b[94m",
+    lightGreen: "\x1b[92m",
+
+    // Backgrounds (Good for Headers)
+    bgRed: "\x1b[41m",
+    bgGreen: "\x1b[42m",
+    bgBlue: "\x1b[44m",
+    bgMagenta: "\x1b[45m"
+};

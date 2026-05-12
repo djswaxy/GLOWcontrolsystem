@@ -27,7 +27,7 @@ ISR(USART0_RX_vect) {
 
 	} 
     
-    TransmitData(0xFF, 0xFF);
+   
 }
 
 void initCommunication() {
@@ -51,15 +51,58 @@ void TransmitData(unsigned char message_id, unsigned char* data) {
 		SendChar(message[i]);
 	}
 }
-
+void Parrot() {
+    unsigned char ParrotSettingID = received_bytes[1];
+    unsigned char ParrotSettingDATA[3] = {received_bytes[2], received_bytes[3], 0x00};
+    TransmitData(ParrotSettingID,ParrotSettingDATA);
+}
 void Receiver() {
     switch(received_bytes[1]){
-        case 0x01:
+        case 0xCC: // PC wants to connect
+            // PC AND ARDUINO ARE NOW CONNECTED
             break;
-        case 0x02:
+        case 0xAC: // setting change
+            if(received_bytes[2] == 0x00) {// CHANGE ALL STATES
+                // TODO LOW PRIORITY
+                // special logic, add so it takes two packets to change all settings
+            } 
+            if(received_bytes[2] == 0x01) {
+                // !!!!ADD ACTUAL SETTING CHANGE LOGIC HERE!!!!
+                Parrot();
+            } // movement sens
+            if(received_bytes[2] == 0x02) {
+                // !!!!ADD ACTUAL SETTING CHANGE LOGIC HERE!!!!
+                Parrot();
+            } // light duration
+            if(received_bytes[2] == 0x03) {
+                // !!!!ADD ACTUAL SETTING CHANGE LOGIC HERE!!!!
+                Parrot();
+            } // max light strength
+            if(received_bytes[2] == 0x04) {
+                // !!!!ADD ACTUAL SETTING CHANGE LOGIC HERE!!!!
+                Parrot();
+            } // standby light strength
+            break;
+        case 0xAB: // Sensor Data    
+             if(received_bytes[2] == 0x00) { // 24 hour passerbys
+                int CurrentDayPasserbys = 68;
+            } 
+            if(received_bytes[2] == 0x01) {// 24 hour Most Active Hour
+                int MostActiveHour = 04; // fra 00 to 24
+                int MostActiveHourAmount = 54;
+
+            } // light duration
+            if(received_bytes[2] == 0x02) { // Week Passerbys
+                int WeekPasserby = 1000;
+            } // max light strength
+            if(received_bytes[2] == 0x03) { // All Time Passerbys
+                int AllTimePasserby = 1000;
+
+            } // standby light strength
             break;
     }
 }
+
 
 void ClearReceivedMessage(){
     for (unsigned char i = 0; i < 6; i++) {
