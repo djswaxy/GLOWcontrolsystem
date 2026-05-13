@@ -7,12 +7,7 @@
     <list default="true" id="6db791fc-1eed-433a-aec0-e1bdedb136c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/communicationHandler.c" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/communicationHandler.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PC/Forbipasserende.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Forbipasserende.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PC/Indstillinger.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Indstillinger.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PC/forbipasserende.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/forbipasserende.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/global.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PC/indstillinger.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/indstillinger.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +113,7 @@
       <workItem from="1776840659921" duration="296000" />
       <workItem from="1776924922823" duration="2734000" />
       <workItem from="1778159503586" duration="244000" />
-      <workItem from="1778487294705" duration="24776000" />
+      <workItem from="1778487294705" duration="25516000" />
     </task>
     <servers />
   </component>

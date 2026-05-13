@@ -19,6 +19,8 @@ extern unsigned short activeLight;
  unsigned int PasserbyAllTime = 980;
 
 
+
+
 volatile unsigned char received_bytes[11];
 volatile unsigned char rx_index = 0;
 volatile unsigned char packet_received = 0;
@@ -95,6 +97,10 @@ void Receiver() {
             unsigned int newDur     = (received_bytes[4] << 8) | received_bytes[5];
             unsigned int newMaxL    = (received_bytes[6] << 8) | received_bytes[7];
             unsigned int newStandby = (received_bytes[8] << 8) | received_bytes[9];
+            dinSensVariabel = newSens;
+            dinDurVariabel = newDur;
+            dinMaxLVariabel = newMaxL;
+            dinStandbyVariabel = newStandby;
             Parrot();
          // SEND DISSE TIL SENSORMETODER   
          break;

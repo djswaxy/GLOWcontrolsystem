@@ -48,8 +48,6 @@ function changeSetting(setting, value) {
     sendPacket(settingChangePacket);
 }
 
-
-
 async function handleIncomingPacket(packet) {
     const hexString = Buffer.from(packet).toString('hex').toUpperCase();
     const formattedHex = hexString.match(/.{1,2}/g).join(' ');
@@ -66,7 +64,7 @@ async function handleIncomingPacket(packet) {
             break;
 
         case 0xAB: //
-            await handle24HrSensorData(packet);
+            await handleSensorData(packet);
             break;
         case 0xCC: //koble til Arduino
             await handleConnection();
@@ -76,6 +74,15 @@ async function handleIncomingPacket(packet) {
             break;
 
     }
+}
+function handleSensorData(packet) {
+    console.log(`${Colors.bgRed}${Colors.black} [-- Bulk Sensor Data Hentet fra Arduino --] ${Colors.reset}`);
+
+    const passerbyDay    = (packet[2] << 8) | packet[3];
+    const passerbyMAH     = (packet[4] << 8) | packet[5];
+    const passerbyWeek    = (packet[6] << 8) | packet[7];
+    const passerbyAllTime = (packet[8] << 8) | packet[9];
+
 }
 function handleBulkSettingResponse(packet) {
     console.log(`${Colors.bgGreen}${Colors.black} [-- Bulk Settings Bekreftet/Hentet fra Arduino --] ${Colors.reset}`);
@@ -92,9 +99,9 @@ function handleBulkSettingResponse(packet) {
 
     console.log(`${Colors.cyan}1. Følsomhet (Sens)  : ${Colors.bright}${sens}${Colors.reset}`);
     console.log(`${Colors.cyan}2. Lys Varighet   : ${Colors.bright}${dur}${Colors.reset}`);
-    console.log(`${Colors.cyan}1. Max Lys   : ${Colors.bright}${sens}${Colors.reset}`);
-    console.log(`${Colors.cyan}2. Standby Lys   : ${Colors.bright}${dur}${Colors.reset}`);
-    // ... dine andre console.logs her ...
+    console.log(`${Colors.cyan}1. Max Lys   : ${Colors.bright}${maxL}${Colors.reset}`);
+    console.log(`${Colors.cyan}2. Standby Lys   : ${Colors.bright}${standby}${Colors.reset}`);
+
 
     // 2. Send de nye innstillingene til ALLE tilkoblede nettsider (WebSockets)
     const payload = JSON.stringify({
@@ -108,30 +115,7 @@ function handleBulkSettingResponse(packet) {
         }
     });
 }
-/*
-function handleSettingChangeResponse(packet) {
 
-
-    if(packet[2] === 0x00) {
-
-        console.log("Movement Trig Sensitivity: ", packet[3])
-        console.log("Light Duration: ", packet[4]);
-        console.log(`${Colors.lightBlue} PLEASE IMPLEMENT ALL SETTING CHANGE, nothing has been recieved${Colors.reset}`)
-
-    }
-    if(packet[2] === 0x01) {
-        console.log("Confirmed Change Movement Trig Sensitivity to: ", packet[3]);
-    }
-    if(packet[2] === 0x02) {
-        console.log("Confirmed Change Light Duration to: ", packet[3]);
-    }
-    if(packet[2] === 0x03) {
-        console.log("Confirmed Change Max Light Strength to: ", packet[3]);
-    }
-    if(packet[2] === 0x04) {
-        console.log("Confirmed Change Standby Light Strength to: ", packet[3]);
-    }
-}*/
 function changeAllSettings(sens, dur, maxL, standby) {
     const getHigh = (val) => (val >> 8) & 0xFF;
     const getLow = (val) => val & 0xFF;
@@ -150,7 +134,9 @@ function changeAllSettings(sens, dur, maxL, standby) {
     console.log(`Sender alle innstillinger. Pakkestørrelse: ${bulkPacket.length} bytes`);
     sendPacket(bulkPacket); //
 }
+/*
 function handle24HrSensorData(packet) {
+
     if(packet[2] === 0x00) { //passerby today
         // websocket send to Energibesparelse
         console.log("24t Sensor : Passerby's today: ", packet[3]);
@@ -172,7 +158,7 @@ function handle24HrSensorData(packet) {
         console.log("24t Sensor : Passerby's All Time ", totalValue);
 
     }
-}
+}*/
 function handleConnection() {
         // send tilbake connection til Arduino
 
