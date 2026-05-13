@@ -78,21 +78,35 @@ async function handleIncomingPacket(packet) {
 function handleSensorData(packet) {
     console.log(`${Colors.bgRed}${Colors.black} [-- Bulk Sensor Data Hentet fra Arduino --] ${Colors.reset}`);
 
-    // De tre første er 8-bits tall, så de leser vi bare rett ut av én byte
-    const passerbyDay       = packet[2]; // currentData[0]
-    const passerbyMAH       = packet[3]; // currentData[1]
-    const passerbyMAHAmount = packet[4]; // currentData[2]
-
-    // De to neste er 16-bits tall, så her må vi bruke bit-shifting for å lime dem sammen
-    const passerbyWeek      = (packet[5] << 8) | packet[6]; // currentData[3] og [4]
-    const passerbyAllTime   = (packet[7] << 8) | packet[8]; // currentData[5] og [6]
-
-    // packet[9] er unused/0x00 akkurat slik du satte currentData[7] = 0x00
+    const passerbyDay       = packet[2];
+    const passerbyMAH       = packet[3];
+    const passerbyMAHAmount = packet[4];
+    const passerbyWeek      = (packet[5] << 8) | packet[6];
+    const passerbyAllTime   = (packet[7] << 8) | packet[8];
 
     console.log(`${Colors.yellow}1. Forbipasserende i dag: ${Colors.bright}${passerbyDay}${Colors.reset}`);
     console.log(`${Colors.yellow}2. Mest aktive time     : ${Colors.bright}Kl. ${passerbyMAH} (${passerbyMAHAmount} personer)${Colors.reset}`);
     console.log(`${Colors.yellow}3. Forbipasserende uke  : ${Colors.bright}${passerbyWeek}${Colors.reset}`);
     console.log(`${Colors.yellow}4. Forbipasserende total: ${Colors.bright}${passerbyAllTime}${Colors.reset}\n`);
+
+    // 1. Pakk dataene inn i JSON
+    const payload = JSON.stringify({
+        kommando: "sensorData",
+        data: {
+            passerbyDay: passerbyDay,
+            passerbyMAH: passerbyMAH,
+            passerbyMAHAmount: passerbyMAHAmount,
+            passerbyWeek: passerbyWeek,
+            passerbyAllTime: passerbyAllTime
+        }
+    });
+
+    // 2. Send til alle tilkoblede nettsider
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(payload);
+        }
+    });
 }
 function handleBulkSettingResponse(packet) {
     console.log(`${Colors.bgGreen}${Colors.black} [-- Bulk Settings Bekreftet/Hentet fra Arduino --] ${Colors.reset}`);
@@ -283,11 +297,12 @@ wss.on('connection', function connection(ws) {
         } catch (e) {
             if (msgStr === "fetchCurrentSettings") {
                 console.log("-- Forespørsel fra nettside: Henter innstillinger fra Arduino --");
-                sendPacket(AskForCurrentSettings); // Sender 0xAD-pakken din over Serial
+                sendPacket(AskForCurrentSettings);
             }
-            if (msgStr === "updateSensor") {
-                console.log("-- Detected Update Sensor Message --");
-                // implementer sensor data logikk her
+            // Endret fra "updateSensor" til "24hr" slik at den matcher frontend-knappen!
+            else if (msgStr === "24hr") {
+                console.log("-- Forespørsel fra nettside: Henter sensordata fra Arduino --");
+                sendPacket(AskForSensorData); // Sender 0xAB pakken over Serial
             } else {
                 console.log('Mottok ukjent beskjed: %s', msgStr);
             }

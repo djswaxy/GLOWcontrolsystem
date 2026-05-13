@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6db791fc-1eed-433a-aec0-e1bdedb136c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/include/communicationHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/include/communicationHandler.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/include/settings.h" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/include/settings.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/communicationHandler.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/led.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/setting.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/forbipasserende.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/forbipasserende.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/global.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

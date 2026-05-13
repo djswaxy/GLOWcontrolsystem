@@ -9,12 +9,34 @@ socket.onopen = function(event) {
     isConnectedForbiPasserende.innerText = `Connected`;
 
 };
+const totalpassers = document.getElementById("totalPassers");
+const totalpassersweek = document.getElementById("totalPassersWeek");
+const mostactivehour = document.getElementById("mostActiveHourValue");
+const total_all_time = document.getElementById("totalAllTime");
 
 socket.onmessage = function(event) {
-    // Handle received message
-    const data = JSON.parse(event.data);
-    console.log(data);
+    try {
+        const parsedMsg = JSON.parse(event.data);
 
+        // Hvis vi mottar sensordata fra Node.js
+        if (parsedMsg.kommando === "sensorData") {
+            const data = parsedMsg.data;
+
+            // Oppdater HTML med de ekte verdiene fra Arduino
+            totalpassers.innerHTML = data.passerbyDay;
+            totalpassersweek.innerHTML = data.passerbyWeek;
+
+            // Formatér mest aktive time pent (f.eks "Kl. 14:00 (52 personer)")
+            let klokkeSlett = data.passerbyMAH < 10 ? "0" + data.passerbyMAH : data.passerbyMAH;
+            mostactivehour.innerHTML = `Kl. ${klokkeSlett}:00 (${data.passerbyMAHAmount} personer)`;
+
+            total_all_time.innerHTML = data.passerbyAllTime;
+
+            console.log("Statistikk oppdatert på skjermen!");
+        }
+    } catch (e) {
+        // Ignorer vanlige tekstbeskjeder som {status: "Mottatt"}
+    }
 };
 
 socket.onclose = function(event) {
@@ -27,15 +49,5 @@ function sendMessage(message) {
     socket.send(message);
 }
 
-const totalpassers = document.getElementById("totalPassers");
-const totalpassersweek = document.getElementById("totalPassersWeek");
-const mostactivehour = document.getElementById("mostActiveHourValue");
-const total_all_time = document.getElementById("totalAllTime");
-
-//EKSEMPLER!! ENDRE DETTE FØR PROSJEKT!!
-totalpassers.innerHTML = Math.floor((Math.random() * 10));
-totalpassersweek.innerHTML = Math.floor((Math.random() * 40));
-mostactivehour.innerHTML = Math.floor((Math.random() * 24));
-total_all_time.innerHTML = Math.floor((Math.random() * 1000));
 
 function get24HrStat() {sendMessage('24hr')}
