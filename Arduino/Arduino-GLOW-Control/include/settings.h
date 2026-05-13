@@ -12,5 +12,7 @@ void sendSettings();
 
 void saveSettings();
 
+void saveStats();
+
 
 #endif // SETTINGS_H
