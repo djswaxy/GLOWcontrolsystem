@@ -2,25 +2,15 @@
 #include "communicationHandler.h"
 #include "settings.h"
 
-
 extern unsigned short mvtSensor;
 extern unsigned short lightDuration;
 extern unsigned short standbyLight;
 extern unsigned short activeLight;
-
-
- unsigned int dinSensVariabel = 20;
- unsigned int dinDurVariabel = 30;
- unsigned int dinMaxLVariabel = 70;
- unsigned int dinStandbyVariabel = 40;
- extern unsigned int PasserbyDay = 60;
- extern unsigned int PasserbyMAH = 04; // fra 00 til 24
- extern unsigned int PasserbyMAHAmount = 52;
- extern unsigned int PasserbyWeek = 320;
- extern unsigned int PasserbyAllTime = 980;
-
-
-
+extern unsigned int PasserbyDay;
+extern unsigned int PasserbyMAH;
+extern unsigned int PasserbyMAHAmount;
+extern unsigned int PasserbyWeek;
+extern unsigned int PasserbyAllTime;
 
 volatile unsigned char received_bytes[11];
 volatile unsigned char rx_index = 0;
@@ -46,10 +36,7 @@ ISR(USART0_RX_vect) {
         else { //handler for packets som blir fucked
             rx_index = 0;
         }
-
 	} 
-    
-   
 }
 
 void initCommunication() {
@@ -113,7 +100,7 @@ void Receiver() {
        
         case 0xAB: { // Sensor Data    
             unsigned char currentData[8];
-           
+            
 
             // Deler 16-bits tallene i Arduino-minnet opp i High og Low bytes
             currentData[0] = PasserbyDay;

@@ -1,4 +1,3 @@
-#define F_CPU 16000000UL
 #include <Arduino.h>
 #include <communicationHandler.h>
 #include <util/delay.h>
@@ -35,28 +34,4 @@ void loop() {
       ClearReceivedMessage();   
   }
 
-  //_delay_ms(1000);
-
-  /*
-  TransmitData(connectToPC.ID, connectToPC.DATA);
-  toggleLED(0);
-  _delay_ms(1000);
-  TransmitData(settingChangeResponseBoth.ID, settingChangeResponseBoth.DATA);
-  _delay_ms(1000);
-  TransmitData(settingChangeResponseMovTrig.ID, settingChangeResponseMovTrig.DATA);
-  _delay_ms(1000);
-  TransmitData(settingChangeResponseLightDur.ID, settingChangeResponseLightDur.DATA);
-  */
-
-  /* test 24hr sensor
-  _delay_ms(1000); 
-  TransmitData(TwentyFourHourSensorToday.ID, TwentyFourHourSensorToday.DATA);
-  _delay_ms(1000);
-  TransmitData(TwentyFourHourSensorMostActiveHour.ID, TwentyFourHourSensorMostActiveHour.DATA);
-  _delay_ms(1000);
-  TransmitData(TwentyFourHourSensorWeek.ID, TwentyFourHourSensorWeek.DATA);
-  _delay_ms(1000);
-  TransmitData(TwentyFourHourSensorAllTime.ID, TwentyFourHourSensorAllTime.DATA);
-  */
-  //ForbiPasserende();
 }

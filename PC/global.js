@@ -30,23 +30,6 @@ function sendPacket(packetArray) {
     const formattedHex = hexString.match(/.{1,2}/g).join(' ');
     console.log(`${Colors.dim}[SENDTE PAKKE ->]: 0x${formattedHex}${Colors.reset}`);
 }
-function changeSetting(setting, value) {
-    let settingP = 0x00;
-    if(setting === "movementTrigSensitivity") {
-        settingP = 0x01
-    }
-    if(setting === "lightDuration") {
-        settingP = 0x02;
-    }
-    if(setting === "maxLightStrength") {
-        settingP = 0x03;
-    }
-    if(setting === "standbyLightStrength") {
-        settingP = 0x04;
-    }
-    const settingChangePacket = new Uint8Array([0xAA, 0xAC, settingP, value, 0xFF, 0xBB]);
-    sendPacket(settingChangePacket);
-}
 
 async function handleIncomingPacket(packet) {
     const hexString = Buffer.from(packet).toString('hex').toUpperCase();
@@ -158,31 +141,7 @@ function changeAllSettings(sens, dur, maxL, standby) {
     console.log(`Sender alle innstillinger. Pakkestørrelse: ${bulkPacket.length} bytes`);
     sendPacket(bulkPacket); //
 }
-/*
-function handle24HrSensorData(packet) {
 
-    if(packet[2] === 0x00) { //passerby today
-        // websocket send to Energibesparelse
-        console.log("24t Sensor : Passerby's today: ", packet[3]);
-    }
-    if(packet[2] === 0x01) { //passerby most active hour
-        // websocket send to Energibesparelse
-        console.log("24t Sensor : Most Active Hour | HOUR: ", packet[3], " | PASSERBY's: ", packet[4]);
-    }
-    if(packet[2] === 0x02) { //passerbys week
-        // websocket send to Energibesparelse
-        console.log("24t Sensor : Passerby's Week ", packet[3]);
-    }
-    if(packet[2] === 0x03) { //passerbys all time
-        // websocket send to Energibesparelse
-        // packet 3 = high byte, packet 4 = low byte
-        const highByte = packet[3];
-        const lowByte = packet[4];
-        const totalValue = (highByte << 8) | lowByte;
-        console.log("24t Sensor : Passerby's All Time ", totalValue);
-
-    }
-}*/
 function handleConnection() {
         // send tilbake connection til Arduino
 
@@ -191,38 +150,9 @@ function handleConnection() {
 
 }
 
-// 1. Listen med de 6 bytene du vil sende (bytt ut med dine egne hex-verdier)
-
-
-// 2. En hjelpefunksjon som skaper en pause (delay)
+// delay funksjon
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-// 3. Funksjonen som sender én og én byte
-async function sendBytesEnAvGangen(SendArray) {
-    console.log('Starter overføring av liste...');
-
-    for (let i = 0; i < SendArray.length; i++) {
-        if (!(SendArray instanceof Uint8Array)) {
-            console.error('Feil: Argumentet må være en Uint8Array');
-            return;
-        }
-        // Hent ut én byte fra listen og gjør den om til en Buffer
-        const singleByte = Buffer.from([SendArray[i]]);
-
-        // Skriv den til porten
-        port.write(singleByte, (err) => {
-            if (err) console.error('Feil ved sending:', err.message);
-        });
-
-        // Skriv ut til terminalen hva vi nettopp sendte (konvertert til hex for lesbarhet)
-        console.log(`Sendte byte ${i + 1}: 0x${SendArray[i].toString(16).toUpperCase()}`);
-
-        // Vent 100 millisekunder før løkken fortsetter til neste byte
-        await delay(1000);
-    }
-
-    console.log('Alle 6 bytes er sendt!');
-}
 // En global liste (samleboks) for å holde på innkommende data
 let rxBuffer = [];
 let isSending = false;
@@ -260,11 +190,10 @@ port.on('error', (err) => {
 
 
 // --- WEBSOCKET SERVER ---
-// It is standard practice to name the server 'wss' (WebSocket Server) to avoid confusing it with a client
+// wss is websocket server, ws is client
 const wss = new WebSocket.Server({ port: 6969 });
 console.log("\x1b[93m[ SERVER START ]\033[0m\n\n\n");
 
-// 'ws' represents the specific client that just connected
 wss.on('connection', function connection(ws) {
     console.log("\x1b[42m[CONNECTION OPENED]\033[0m");
 
@@ -338,7 +267,6 @@ const Colors = {
     lightBlue: "\x1b[94m",
     lightGreen: "\x1b[92m",
 
-    // Backgrounds (Good for Headers)
     bgRed: "\x1b[41m",
     bgGreen: "\x1b[42m",
     bgBlue: "\x1b[44m",

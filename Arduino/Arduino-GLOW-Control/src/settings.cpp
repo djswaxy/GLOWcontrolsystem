@@ -13,44 +13,47 @@ unsigned int PasserbyWeek = 320;
 unsigned int PasserbyAllTime = 980;
 
 void getSettings() {
-    mvtSensor = EEPROM.read(0);
-    lightDuration = EEPROM.read(1);
-    standbyLight = EEPROM.read(2);
-    activeLight = EEPROM.read(3);
+    EEPROM.get(0, mvtSensor);
+    EEPROM.get(2, lightDuration);
+    EEPROM.get(4, standbyLight);
+    EEPROM.get(6, activeLight);
 }
 
 void getStats() {
-    PasserbyDay = EEPROM.read(4);
-    PasserbyMAH = EEPROM.read(5);
-    PasserbyMAHAmount = EEPROM.read(6);
-    PasserbyWeek = EEPROM.read(7);
-    PasserbyAllTime = EEPROM.read(8);
+    EEPROM.get(8, PasserbyDay);
+    EEPROM.get(10, PasserbyMAH);
+    EEPROM.get(12, PasserbyMAHAmount);
+    EEPROM.get(14, PasserbyWeek);
+    EEPROM.get(16, PasserbyAllTime);
 }
+
 
 void sendSettings() {
     unsigned char commandID = 0xAC;
     unsigned char commandDATA[8] = {
-        mvtSensor >> 8, 
-        mvtSensor, 
-        lightDuration >> 8, 
-        lightDuration,
-        standbyLight >> 8,
-        standbyLight,
-        activeLight >> 8,
-        activeLight
+        (unsigned char)(mvtSensor >> 8), 
+        (unsigned char)(mvtSensor), 
+        (unsigned char)(lightDuration >> 8), 
+        (unsigned char)(lightDuration),
+        (unsigned char)(standbyLight >> 8),
+        (unsigned char)(standbyLight),
+        (unsigned char)(activeLight >> 8),
+        (unsigned char)(activeLight)
     };
     TransmitData(commandID, commandDATA);
 }
 
 void saveSettings() {
-    EEPROM.write(0, mvtSensor);
-    EEPROM.write(1, lightDuration);
-    EEPROM.write(2, standbyLight);
-    EEPROM.write(3, activeLight);
-    EEPROM.write(4, PasserbyDay);
-    EEPROM.write(5, PasserbyMAH);
-    EEPROM.write(6, PasserbyMAHAmount);
-    EEPROM.write(7, PasserbyWeek);
-    EEPROM.write(8, PasserbyAllTime);
+    EEPROM.put(0, mvtSensor);
+    EEPROM.put(2, lightDuration);
+    EEPROM.put(4, standbyLight);
+    EEPROM.put(6, activeLight);
+}
+void saveStats() {
+    EEPROM.put(8, PasserbyDay);
+    EEPROM.put(10, PasserbyMAH);
+    EEPROM.put(12, PasserbyMAHAmount);
+    EEPROM.put(14, PasserbyWeek);
+    EEPROM.put(16, PasserbyAllTime);
 }
 
