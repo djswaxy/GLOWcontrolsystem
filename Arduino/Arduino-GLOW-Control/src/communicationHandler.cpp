@@ -1,5 +1,6 @@
 
 #include "communicationHandler.h"
+#include "settings.h"
 
 
 extern unsigned short mvtSensor;
@@ -88,61 +89,51 @@ void Parrot() {
 }
 void Receiver() {
     switch(received_bytes[1]){
-        case 0xCC: // PC wants to connect
+        case 0xCC:
+        { // PC wants to connect
             // PC AND ARDUINO ARE NOW CONNECTED
             break;
+        }
         case 0xAC: 
         {
             unsigned int newSens    = (received_bytes[2] << 8) | received_bytes[3];
             unsigned int newDur     = (received_bytes[4] << 8) | received_bytes[5];
             unsigned int newMaxL    = (received_bytes[6] << 8) | received_bytes[7];
             unsigned int newStandby = (received_bytes[8] << 8) | received_bytes[9];
-            dinSensVariabel = newSens;
-            dinDurVariabel = newDur;
-            dinMaxLVariabel = newMaxL;
-            dinStandbyVariabel = newStandby;
+            mvtSensor = newSens;
+            lightDuration = newDur;
+            standbyLight = newMaxL;
+            activeLight = newStandby;
+
+            saveSettings();
             Parrot();
          // SEND DISSE TIL SENSORMETODER   
          break;
         }
        
-        case 0xAB: // Sensor Data    
-             if(received_bytes[2] == 0x00) { // 24 hour passerbys
-                int CurrentDayPasserbys = 68;
-            } 
-            if(received_bytes[2] == 0x01) {// 24 hour Most Active Hour
-                int MostActiveHour = 04; // fra 00 to 24
-                int MostActiveHourAmount = 54;
-
-            } // light duration
-            if(received_bytes[2] == 0x02) { // Week Passerbys
-                int WeekPasserby = 1000;
-            } // max light strength
-            if(received_bytes[2] == 0x03) { // All Time Passerbys
-                int AllTimePasserby = 1000;
-
-            } // standby light strength
-            break;
-        case 0xAD: // PC ber om å få tilsendt nåværende innstillinger
-        {
+        case 0xAB: { // Sensor Data    
             unsigned char currentData[8];
            
 
             // Deler 16-bits tallene i Arduino-minnet opp i High og Low bytes
-            currentData[0] = (dinSensVariabel >> 8) & 0xFF;
-            currentData[1] = dinSensVariabel & 0xFF;
+            currentData[0] = PasserbyDay;
+            currentData[1] = PasserbyMAH;
+            currentData[2] = PasserbyMAHAmount;
+            currentData[3] = (PasserbyWeek >> 8) & 0xFF;
 
-            currentData[2] = (dinDurVariabel >> 8) & 0xFF;
-            currentData[3] = dinDurVariabel & 0xFF;
+            currentData[4] =  PasserbyWeek & 0xFF;
+            currentData[5] = (PasserbyAllTime >> 8) & 0xFF;
 
-            currentData[4] = (dinMaxLVariabel >> 8) & 0xFF;
-            currentData[5] = dinMaxLVariabel & 0xFF;
-
-            currentData[6] = (dinStandbyVariabel >> 8) & 0xFF;
-            currentData[7] = dinStandbyVariabel & 0xFF;
+            currentData[6] = PasserbyAllTime & 0xFF;
+            currentData[7] = 0x00;
 
             // Send dem tilbake med ID 0xAC (slik at Node.js fanger den opp i handleBulkSettingResponse)
-            TransmitData(0xAC, currentData);
+            TransmitData(0xAB, currentData);
+            break;
+        }
+        case 0xAD: // PC ber om å få tilsendt nåværende innstillinger
+        {
+            sendSettings();
             break;
         }
         case 0xEE:

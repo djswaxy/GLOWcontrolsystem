@@ -78,11 +78,21 @@ async function handleIncomingPacket(packet) {
 function handleSensorData(packet) {
     console.log(`${Colors.bgRed}${Colors.black} [-- Bulk Sensor Data Hentet fra Arduino --] ${Colors.reset}`);
 
-    const passerbyDay    = (packet[2] << 8) | packet[3];
-    const passerbyMAH     = (packet[4] << 8) | packet[5];
-    const passerbyWeek    = (packet[6] << 8) | packet[7];
-    const passerbyAllTime = (packet[8] << 8) | packet[9];
+    // De tre første er 8-bits tall, så de leser vi bare rett ut av én byte
+    const passerbyDay       = packet[2]; // currentData[0]
+    const passerbyMAH       = packet[3]; // currentData[1]
+    const passerbyMAHAmount = packet[4]; // currentData[2]
 
+    // De to neste er 16-bits tall, så her må vi bruke bit-shifting for å lime dem sammen
+    const passerbyWeek      = (packet[5] << 8) | packet[6]; // currentData[3] og [4]
+    const passerbyAllTime   = (packet[7] << 8) | packet[8]; // currentData[5] og [6]
+
+    // packet[9] er unused/0x00 akkurat slik du satte currentData[7] = 0x00
+
+    console.log(`${Colors.yellow}1. Forbipasserende i dag: ${Colors.bright}${passerbyDay}${Colors.reset}`);
+    console.log(`${Colors.yellow}2. Mest aktive time     : ${Colors.bright}Kl. ${passerbyMAH} (${passerbyMAHAmount} personer)${Colors.reset}`);
+    console.log(`${Colors.yellow}3. Forbipasserende uke  : ${Colors.bright}${passerbyWeek}${Colors.reset}`);
+    console.log(`${Colors.yellow}4. Forbipasserende total: ${Colors.bright}${passerbyAllTime}${Colors.reset}\n`);
 }
 function handleBulkSettingResponse(packet) {
     console.log(`${Colors.bgGreen}${Colors.black} [-- Bulk Settings Bekreftet/Hentet fra Arduino --] ${Colors.reset}`);

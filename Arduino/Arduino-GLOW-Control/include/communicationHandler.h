@@ -2,9 +2,6 @@
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #include <avr/io.h>
 #include "uart.h"
@@ -22,8 +19,5 @@ void Receiver();
 
 void ClearReceivedMessage();
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif // COMMUNICATION_H
