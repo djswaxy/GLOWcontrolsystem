@@ -1,6 +1,13 @@
 
 #include "communicationHandler.h"
 
+
+extern unsigned short mvtSensor;
+extern unsigned short lightDuration;
+extern unsigned short standbyLight;
+extern unsigned short activeLight;
+
+
  unsigned int dinSensVariabel = 20;
  unsigned int dinDurVariabel = 30;
  unsigned int dinMaxLVariabel = 70;
