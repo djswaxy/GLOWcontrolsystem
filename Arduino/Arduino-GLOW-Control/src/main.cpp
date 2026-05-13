@@ -11,51 +11,20 @@ unsigned char lysTimer;
 // Messages
 struct {
   unsigned char ID = 0xCC;
-  unsigned char DATA[3] = {0xCC, 0xCC, 0xCC};
+  unsigned char DATA[8] = {0xCC, 0xCC, 0xCC, 0x00, 0x00, 0x00, 0x00, 0x00};
 } connectToPC;
-
-struct {
-  unsigned char ID = 0xAC;
-  unsigned char DATA[3] = {0x00, 0x18, 0x05};
-} settingChangeResponseBoth; // test med respons for både Movement Sens og Light Duration
-
-struct {
-  unsigned char ID = 0xAC;
-  unsigned char DATA[3] = {0x01, 0x22, 0x00};
-} settingChangeResponseMovTrig; // test med respons for både Movement Sens = 34 (%?)
-
-struct {
-  unsigned char ID = 0xAC;
-  unsigned char DATA[3] = {0x02, 0x07, 0x00};
-} settingChangeResponseLightDur; // test med respons for Light Duration = 7s
-
-struct {
-  unsigned char ID = 0xAB;
-  unsigned char DATA[3] = {0x00, 0x34, 0x00};
-} TwentyFourHourSensorToday; // test med passerby's today 0x34 = 52
-struct {
-  unsigned char ID = 0xAB;
-  unsigned char DATA[3] = {0x01, 0x04, 0x11};
-} TwentyFourHourSensorMostActiveHour; // test med passerby's today 0x34 = 52
-struct {
-  unsigned char ID = 0xAB;
-  unsigned char DATA[3] = {0x02, 0x66, 0x00};
-} TwentyFourHourSensorWeek; //
-struct {
-  unsigned char ID = 0xAB;
-  unsigned char DATA[3] = {0x03, 0x09, 0xC4};
-} TwentyFourHourSensorAllTime; // test med ALL TIME = 2500 med high byte så low byte
 
 
 void setup() {
   initLEDport();
   InitUART0(9600, 8, 1);
   initCommunication();
-
+  TransmitData(connectToPC.ID,connectToPC.DATA); 
   toggleLED(5);
 }
 
 void loop() {
+
   if (packet_received == 1) {
       
       // Kjør logikken for å tolke hva Node.js nettopp sendte oss

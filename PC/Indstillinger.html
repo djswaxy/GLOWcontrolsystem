@@ -15,13 +15,20 @@
 
 </div>
 <div id=middle>
-    <button class="wide" id="fetchCurrentSettings"> --- FETCH CURRENT SETTINGS ---</button>
+    <button class="wide" id="fetchCurrentSettingsBtn"> --- FETCH CURRENT SETTINGS ---</button>
     <p>Sensitivitet Bevegelse</p>
-    <input type="range" min="1" max="100" value="50" class="slider" id="movementTrigSensitivity" oninput="this.nextElementSibling.value = this.value">
-    <output>50</output>
+    <input type="range" min="100" max="400" value="100" class="slider" id="movementTrigSensitivity" oninput="this.nextElementSibling.value = this.value">
+    <output>100</output>
     <p>Lengde Lys er tent efter forbipasserende</p>
-    <input type="range" min="1" max="100" value="5" class="slider" id="lightDuration" oninput="this.nextElementSibling.value = this.value">
-    <output>5</output>
+    <input type="range" min="1" max="10" value="1" class="slider" id="lightDuration" oninput="this.nextElementSibling.value = this.value">
+    <output>1</output>
+    <p>Max Lysstyrke</p>
+    <input type="range" min="1" max="100" value="80" class="slider" id="maxLightStrength" oninput="this.nextElementSibling.value = this.value">
+    <output>80</output>
+    <p>Standby Lysstyrke</p>
+    <input type="range" min="1" max="100" value="40" class="slider" id="standbyLightStrength" oninput="this.nextElementSibling.value = this.value">
+    <output>40</output>
+
     <button class=wide id="changeSettingBtn"> --- SUBMIT SETTING CHANGES ---</button>
 
 </div>
