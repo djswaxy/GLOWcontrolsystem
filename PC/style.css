@@ -7,7 +7,14 @@
     src: url('PC/Homme.ttf');
 }
 #isConnected {
-    color: red;
+    margin: 30px 0 30px 0;
+    width: 300px;
+    height: 100px;
+    justify-self: center;
+    align-items: center;
+    background-image: url('NotConnected.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 html {
     margin: 0;
@@ -15,7 +22,7 @@ html {
     overflow: hidden;
 }
 body {
-    background-color: rgb(42,41,55);
+    background-color: #8494FF;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -43,11 +50,11 @@ body {
     margin-bottom: 10px;
     height: 200px;
     border-radius: 15px;
-    border: 10px solid white;
-    color: white;
+    border: 10px #C9BEFF;
+    color: #FFDBFD;
     font-family: 'Courier New', Courier, monospace;
     font-size: 40px;
-    background-color: transparent;
+    background-color: #6367FF;
     font-weight: bold;
 }
 #middle button:hover {
@@ -56,8 +63,8 @@ body {
     cursor: pointer;
 }
 #systemTitle {
-    font-family: 'Courier New', "serif";
-    color: white;
+    font-family: 'Homebase', "serif";
+    color: #C9BEFF;
     font-size: 100px;
     justify-self: center;
 

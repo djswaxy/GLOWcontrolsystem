@@ -5,8 +5,8 @@ const socket = new WebSocket('ws://localhost:6969');
 socket.onopen = function(event) {
     // Handle connection open
 
-    isConnected.style.color = 'green';
-    isConnected.innerText = `Connected`;
+    isConnected.style.backgroundImage = "url('Connected.png')";
+
 
 };
 

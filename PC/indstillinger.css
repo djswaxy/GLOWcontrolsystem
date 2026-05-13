@@ -12,7 +12,7 @@ html {
     overflow: hidden;
 }
 body {
-    background-color: rgb(42,41,55);
+    background-color: #8494FF;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -20,15 +20,19 @@ body {
     text-align: center;
 }
 body p {
-    color: white;
+    color: #FFDBFD;
+}
+Button {
+    background-color: #6367FF;
+    color: #FFDBFD;
+    border-radius: 15px;
+    border: none;
 }
 #homebtn {
-    color: white;
-    border-radius: 15px;
-    border: 10px solid white;
-    background-color: transparent;
+
     width: 100px;
     height: 50px;
+
 }
 body button:hover {
     background-color: white;
@@ -36,10 +40,14 @@ body button:hover {
     cursor: pointer;
 }
 body h2{
-    color: white;
+    color: #FFDBFD;
     margin-left: 50px;
 }
 #left {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
     width: 33%;
     height: 100%;
 }
@@ -56,17 +64,24 @@ body h2{
     height: 100%;
 }
 #middle p {
-    color: white;
+    color: #FFDBFD;
     font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
 }
 output {
-    color: white;
+    color: #FFDBFD;
     font-family: 'Courier New', Courier, monospace;
     font-size: 30px;
 }
 #settingsIsConnected {
-    color: red;
+    margin: 30px 0 30px 0;
+    width: 300px;
+    height: 100px;
+    justify-self: center;
+    align-items: center;
+    background-image: url('NotConnected.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 .wide {
     height: 50px;

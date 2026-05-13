@@ -5,8 +5,7 @@ const socket = new WebSocket('ws://localhost:6969');
 socket.onopen = function(event) {
     // Handle connection open
 
-    isConnectedForbiPasserende.style.color = 'green';
-    isConnectedForbiPasserende.innerText = `Connected`;
+    isConnectedForbiPasserende.style.backgroundImage = "url('Connected.png')";
 
 };
 const totalpassers = document.getElementById("totalPassers");

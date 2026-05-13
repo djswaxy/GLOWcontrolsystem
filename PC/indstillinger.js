@@ -31,8 +31,8 @@ fetchCurrentSettingsBtn.addEventListener('click', () => {
 socket.onopen = function(event) {
     // Handle connection open
 
-    settingsIsConnected.style.color = 'green';
-    settingsIsConnected.innerText = `Connected`;
+    settingsIsConnected.style.backgroundImage = "url('Connected.png')";
+
 
 };
 socket.onmessage = function(event) {

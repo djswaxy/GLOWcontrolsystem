@@ -6,11 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="6db791fc-1eed-433a-aec0-e1bdedb136c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/communicationHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/communicationHandler.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/setting.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/settings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/settings.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PC/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/Energibesparelse.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Energibesparelse.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/Forbipasserende.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Forbipasserende.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/Indstillinger.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Indstillinger.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/forbipasserende.css" beforeDir="false" afterPath="$PROJECT_DIR$/PC/forbipasserende.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/forbipasserende.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/forbipasserende.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/indstillinger.css" beforeDir="false" afterPath="$PROJECT_DIR$/PC/indstillinger.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/indstillinger.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/indstillinger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/PC/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/stylegraphpage.css" beforeDir="false" afterPath="$PROJECT_DIR$/PC/stylegraphpage.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +24,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="166" />
+    <option name="cachedIndexableFilesCount" value="118" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -117,6 +123,7 @@
       <workItem from="1776924922823" duration="2734000" />
       <workItem from="1778159503586" duration="244000" />
       <workItem from="1778487294705" duration="25516000" />
+      <workItem from="1778685768284" duration="3596000" />
     </task>
     <servers />
   </component>
@@ -133,5 +140,12 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JavascriptDebugType">
+        <watch expression="&#10;    border: 10px solid white;&#10;    background-color: transparent;" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

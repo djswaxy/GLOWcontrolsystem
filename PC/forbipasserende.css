@@ -5,19 +5,23 @@ html {
 #top {
     display: flex;
     flex-direction: row;
-    color: white;
-    margin: 10px;
+    color: #FFDBFD;
+
+}
+
+Button {
+    background-color: #6367FF;
+    color: #FFDBFD;
+    border-radius: 15px;
+    border: none;
 }
 #refreshbtn {
-    color: white;
     border-radius: 15px;
-    border: 10px solid white;
-    background-color: transparent;
     width: 200px;
     height: 50px;
 }
 body {
-    background-color: rgb(42,41,55);
+    background-color: #8494FF;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -25,10 +29,8 @@ body {
     align-items: center;
 }
 #homebtn {
-    color: white;
     border-radius: 15px;
-    border: 10px solid white;
-    background-color: transparent;
+
     width: 100px;
     height: 50px;
 }
@@ -38,13 +40,16 @@ body {
     cursor: pointer;
 }
 body h2 {
-    color: white;
+    color: #FFDBFD;
+}
+h2 {
+    font-family: 'Courier New', "serif";
 }
 #rawStats {
-    color: white;
+    color: #FFDBFD;
     border-radius: 10px;
-    border: 10px solid white;
-    background-color: transparent;
+
+    background-color: #6367FF;
     width: 500px;
     height: 300px;
     font-family: 'Courier New', Courier, monospace;
@@ -53,4 +58,14 @@ body h2 {
 }
 .statTitles {
     font-weight: bold;
+}
+#isConnectedForbiPasserende {
+    margin: 30px 0 30px 0;
+    width: 300px;
+    height: 100px;
+    justify-self: center;
+    align-items: center;
+    background-image: url('NotConnected.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }

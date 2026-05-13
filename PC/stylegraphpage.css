@@ -1,16 +1,22 @@
 body {
-    background-color: rgb(42,41,55);
+    background-color: #8494FF;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 1500px;
+    align-items: center;
 }
 html h2 {
-    color: white;
+    color: #FFDBFD;
+    font-family: 'Courier New', Courier, monospace;
 }
 body button {
-    color: white;
-    border-radius: 15px;
-    border: 10px solid white;
-    background-color: transparent;
     width: 100px;
     height: 50px;
+    background-color: #6367FF;
+    color: #FFDBFD;
+    border-radius: 15px;
+    border: none;
 }
 body button:hover {
     background-color: white;
