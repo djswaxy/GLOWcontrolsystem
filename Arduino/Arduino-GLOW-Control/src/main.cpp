@@ -4,11 +4,10 @@
 #include <util/delay.h>
 #include <led.h>
 #include <uart.h>
+#include <settings.h>
 extern volatile unsigned char packet_received;
 
-unsigned char lysStyrke;
-unsigned char lysTimer;
-// Messages
+
 struct {
   unsigned char ID = 0xCC;
   unsigned char DATA[8] = {0xCC, 0xCC, 0xCC, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -20,6 +19,7 @@ void setup() {
   InitUART0(9600, 8, 1);
   initCommunication();
   TransmitData(connectToPC.ID,connectToPC.DATA); 
+  getSettings();
   toggleLED(5);
 }
 
