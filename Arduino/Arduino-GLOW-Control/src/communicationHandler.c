@@ -12,6 +12,11 @@ extern unsigned short activeLight;
  unsigned int dinDurVariabel = 30;
  unsigned int dinMaxLVariabel = 70;
  unsigned int dinStandbyVariabel = 40;
+ unsigned int PasserbyDay = 60;
+ unsigned int PasserbyMAH = 04; // fra 00 til 24
+ unsigned int PasserbyMAHAmount = 52;
+ unsigned int PasserbyWeek = 320;
+ unsigned int PasserbyAllTime = 980;
 
 
 volatile unsigned char received_bytes[11];
