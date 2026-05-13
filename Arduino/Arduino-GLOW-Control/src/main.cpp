@@ -20,6 +20,7 @@ void setup() {
   initCommunication();
   TransmitData(connectToPC.ID,connectToPC.DATA); 
   getSettings();
+  saveSettings();
   toggleLED(5);
 }
 

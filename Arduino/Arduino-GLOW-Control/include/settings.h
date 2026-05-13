@@ -6,6 +6,8 @@
 
 void getSettings();
 
+void getStats();
+
 void sendSettings();
 
 void saveSettings();
