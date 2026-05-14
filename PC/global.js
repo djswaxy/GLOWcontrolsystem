@@ -1,7 +1,7 @@
 
 let currentSettings = {
     movementTrigSensitivity: 10,
-    lightDuration: 5,
+    distance: 5,
     maxLightStrength: 255,
     standbyLightStrength: 50
 };
@@ -94,18 +94,18 @@ function handleSensorData(packet) {
 function handleBulkSettingResponse(packet) {
     console.log(`${Colors.bgGreen}${Colors.black} [-- Bulk Settings Bekreftet/Hentet fra Arduino --] ${Colors.reset}`);
     const sens    = (packet[2] << 8) | packet[3];
-    const dur     = (packet[4] << 8) | packet[5];
+    const dist     = (packet[4] << 8) | packet[5];
     const maxL    = (packet[6] << 8) | packet[7];
     const standby = (packet[8] << 8) | packet[9];
 
     // 1. Oppdater PC-ens minne
     currentSettings.movementTrigSensitivity = sens;
-    currentSettings.lightDuration = dur;
+    currentSettings.distance = dist;
     currentSettings.maxLightStrength = maxL;
     currentSettings.standbyLightStrength = standby;
 
     console.log(`${Colors.cyan}1. Følsomhet (Sens)  : ${Colors.bright}${sens}${Colors.reset}`);
-    console.log(`${Colors.cyan}2. Lys Varighet   : ${Colors.bright}${dur}${Colors.reset}`);
+    console.log(`${Colors.cyan}2. Bevegelse Distance  : ${Colors.bright}${dist}${Colors.reset}`);
     console.log(`${Colors.cyan}1. Max Lys   : ${Colors.bright}${maxL}${Colors.reset}`);
     console.log(`${Colors.cyan}2. Standby Lys   : ${Colors.bright}${standby}${Colors.reset}`);
 
@@ -123,7 +123,7 @@ function handleBulkSettingResponse(packet) {
     });
 }
 
-function changeAllSettings(sens, dur, maxL, standby) {
+function changeAllSettings(sens, dist, maxL, standby) {
     const getHigh = (val) => (val >> 8) & 0xFF;
     const getLow = (val) => val & 0xFF;
 
@@ -132,7 +132,7 @@ function changeAllSettings(sens, dur, maxL, standby) {
         0xAA,
         0xAC,
         getHigh(sens), getLow(sens),       // Bytes 2 og 3
-        getHigh(dur), getLow(dur),         // Bytes 4 og 5
+        getHigh(dist), getLow(dist),         // Bytes 4 og 5
         getHigh(maxL), getLow(maxL),       // Bytes 6 og 7
         getHigh(standby), getLow(standby), // Bytes 8 og 9
         0xBB
@@ -211,14 +211,14 @@ wss.on('connection', function connection(ws) {
 
                 // 1. Oppdater PC-ens hukommelse med de nye verdiene
                 currentSettings.movementTrigSensitivity = parsedMsg.data.movementTrigSensitivity;
-                currentSettings.lightDuration           = parsedMsg.data.lightDuration;
+                currentSettings.distance           = parsedMsg.data.distance;
                 currentSettings.maxLightStrength        = parsedMsg.data.maxLightStrength;
                 currentSettings.standbyLightStrength    = parsedMsg.data.standbyLightStrength;
 
                 // 2. Send alt ned til Arduinoen i ÉN operasjon
                 changeAllSettings(
                     currentSettings.movementTrigSensitivity,
-                    currentSettings.lightDuration,
+                    currentSettings.distance,
                     currentSettings.maxLightStrength,
                     currentSettings.standbyLightStrength
                 );

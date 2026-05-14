@@ -1,11 +1,17 @@
 #include <settings.h>
 #include <communicationHandler.h>
+#include <motionSensor.h>
+
+extern int maxDistance;
+extern int movementThreshold;
 
 
-unsigned short mvtSensor = 0x003C;
-unsigned short lightDuration = 0x0064;
+unsigned short mvtSensor = movementThreshold;
+unsigned short dist = maxDistance;
+
 unsigned short standbyLight = 0x03E8;
 unsigned short activeLight = 0x2710;
+
 unsigned int PasserbyDay = 60;
 unsigned int PasserbyMAH = 04; // fra 00 til 24
 unsigned int PasserbyMAHAmount = 52;
@@ -14,9 +20,11 @@ unsigned int PasserbyAllTime = 980;
 
 void getSettings() {
     EEPROM.get(0, mvtSensor);
-    EEPROM.get(2, lightDuration);
+    EEPROM.get(2, dist);
     EEPROM.get(4, standbyLight);
     EEPROM.get(6, activeLight);
+    setMovementThreshold(mvtSensor);
+    setDistance(dist);
 }
 
 void getStats() {
@@ -33,8 +41,8 @@ void sendSettings() {
     unsigned char commandDATA[8] = {
         (unsigned char)(mvtSensor >> 8), 
         (unsigned char)(mvtSensor), 
-        (unsigned char)(lightDuration >> 8), 
-        (unsigned char)(lightDuration),
+        (unsigned char)(dist >> 8), 
+        (unsigned char)(dist),
         (unsigned char)(standbyLight >> 8),
         (unsigned char)(standbyLight),
         (unsigned char)(activeLight >> 8),
@@ -45,7 +53,7 @@ void sendSettings() {
 
 void saveSettings() {
     EEPROM.put(0, mvtSensor);
-    EEPROM.put(2, lightDuration);
+    EEPROM.put(2, dist);
     EEPROM.put(4, standbyLight);
     EEPROM.put(6, activeLight);
 }

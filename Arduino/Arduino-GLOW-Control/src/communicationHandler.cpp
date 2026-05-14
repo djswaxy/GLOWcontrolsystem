@@ -1,11 +1,14 @@
 
 #include "communicationHandler.h"
 #include "settings.h"
+#include "motionSensor.h"
+
 
 extern unsigned short mvtSensor;
-extern unsigned short lightDuration;
+extern unsigned short dist;
 extern unsigned short standbyLight;
 extern unsigned short activeLight;
+
 extern unsigned int PasserbyDay;
 extern unsigned int PasserbyMAH;
 extern unsigned int PasserbyMAHAmount;
@@ -84,14 +87,17 @@ void Receiver() {
         case 0xAC: 
         {
             unsigned int newSens    = (received_bytes[2] << 8) | received_bytes[3];
-            unsigned int newDur     = (received_bytes[4] << 8) | received_bytes[5];
+            unsigned int newDist     = (received_bytes[4] << 8) | received_bytes[5];
             unsigned int newMaxL    = (received_bytes[6] << 8) | received_bytes[7];
             unsigned int newStandby = (received_bytes[8] << 8) | received_bytes[9];
             mvtSensor = newSens;
-            lightDuration = newDur;
+            dist = newDist;
             standbyLight = newMaxL;
             activeLight = newStandby;
 
+            setMovementThreshold(mvtSensor);
+            setDistance(dist);
+            
             saveSettings();
             Parrot();
          // SEND DISSE TIL SENSORMETODER   

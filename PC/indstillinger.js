@@ -2,7 +2,7 @@ settingsIsConnected = document.getElementById("settingsIsConnected");
 const socket = new WebSocket('ws://localhost:6969');
 
 const movementTrigSensitivity = document.getElementById("movementTrigSensitivity");
-const lightDuration = document.getElementById("lightDuration");
+const distance = document.getElementById("distance");
 const maxLightStrength = document.getElementById("maxLightStrength");
 const standbyLightStrength = document.getElementById("standbyLightStrength");
 const changeSettingBtn = document.getElementById("changeSettingBtn");
@@ -11,7 +11,7 @@ changeSettingBtn.addEventListener('click', () => {
     // 1. Samle alle verdier og gjør dem om til tall (parseInt)
     const nyeInnstillinger = {
         movementTrigSensitivity: parseInt(movementTrigSensitivity.value, 10),
-        lightDuration: parseInt(lightDuration.value, 10),
+        distance: parseInt(distance.value, 10),
         maxLightStrength: parseInt(maxLightStrength.value, 10),
         standbyLightStrength: parseInt(standbyLightStrength.value, 10)
     };
@@ -66,15 +66,15 @@ socket.onmessage = function(event) {
 
             // Oppdater verdiene på selve slideren
             movementTrigSensitivity.value = data.movementTrigSensitivity;
-            lightDuration.value = data.lightDuration;
+            distance.value = data.distance;
             maxLightStrength.value = data.maxLightStrength;
             standbyLightStrength.value = data.standbyLightStrength;
 
             // Oppdater teksten (<output>) ved siden av slideren
-            movementTrigSensitivity.nextElementSibling.value = data.movementTrigSensitivity + " ms";
-            lightDuration.nextElementSibling.value = data.lightDuration + " sek";
-            maxLightStrength.nextElementSibling.value = data.maxLightStrength + " %";
-            standbyLightStrength.nextElementSibling.value = data.standbyLightStrength + " %";
+            movementTrigSensitivity.nextElementSibling.value = data.movementTrigSensitivity;
+            distance.nextElementSibling.value = data.distance;
+            maxLightStrength.nextElementSibling.value = data.maxLightStrength;
+            standbyLightStrength.nextElementSibling.value = data.standbyLightStrength;
 
             console.log("Sliderne er oppdatert med verdier fra Arduino!");
         }

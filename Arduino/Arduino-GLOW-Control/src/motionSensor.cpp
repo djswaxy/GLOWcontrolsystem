@@ -25,11 +25,11 @@ void setupMotionSensors() {
   }
 }
 
-void setDistance(int distanceValue) { // Adjust range cm 
+void setDistance(int distanceValue) { // Adjust range cm (2cm - 400cm)
   maxDistance = distanceValue;
 }
 
-void setMovementThreshold(int thresholdValue) { // Adjust sensitivity cm
+void setMovementThreshold(int thresholdValue) { // Adjust sensitivity cm ()
   movementThreshold = thresholdValue;
 }
 
