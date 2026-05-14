@@ -4,7 +4,7 @@
 
 extern int maxDistance;
 extern int movementThreshold;
-
+extern void applyLightSettings(unsigned short maxPercent, unsigned short standbyPercent);
 
 unsigned short mvtSensor = movementThreshold;
 unsigned short dist = maxDistance;
@@ -23,8 +23,11 @@ void getSettings() {
     EEPROM.get(2, dist);
     EEPROM.get(4, standbyLight);
     EEPROM.get(6, activeLight);
+    
+   
     setMovementThreshold(mvtSensor);
     setDistance(dist);
+    applyLightSettings(activeLight, standbyLight);
 }
 
 void getStats() {
@@ -43,10 +46,11 @@ void sendSettings() {
         (unsigned char)(mvtSensor), 
         (unsigned char)(dist >> 8), 
         (unsigned char)(dist),
-        (unsigned char)(standbyLight >> 8),
-        (unsigned char)(standbyLight),
         (unsigned char)(activeLight >> 8),
-        (unsigned char)(activeLight)
+        (unsigned char)(activeLight),
+        (unsigned char)(standbyLight >> 8),
+        (unsigned char)(standbyLight)
+        
     };
     TransmitData(commandID, commandDATA);
 }

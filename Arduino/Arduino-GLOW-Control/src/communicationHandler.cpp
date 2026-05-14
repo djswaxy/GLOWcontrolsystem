@@ -2,7 +2,7 @@
 #include "communicationHandler.h"
 #include "settings.h"
 #include "motionSensor.h"
-
+extern void applyLightSettings(unsigned short maxPercent, unsigned short standbyPercent);
 
 extern unsigned short mvtSensor;
 extern unsigned short dist;
@@ -92,12 +92,14 @@ void Receiver() {
             unsigned int newStandby = (received_bytes[8] << 8) | received_bytes[9];
             mvtSensor = newSens;
             dist = newDist;
-            standbyLight = newMaxL;
-            activeLight = newStandby;
+            activeLight = newMaxL;
+            standbyLight = newStandby;
+            
+            applyLightSettings(activeLight, standbyLight);
 
             setMovementThreshold(mvtSensor);
             setDistance(dist);
-            
+
             saveSettings();
             Parrot();
          // SEND DISSE TIL SENSORMETODER   

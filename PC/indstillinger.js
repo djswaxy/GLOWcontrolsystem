@@ -35,15 +35,7 @@ socket.onopen = function(event) {
 
 
 };
-socket.onmessage = function(event) {
-    // Prøv å lese data. Hvis Node.js bare sender en tekststreng, unngår vi at koden krasjer.
-    try {
-        const data = JSON.parse(event.data);
-        console.log("Mottatt JSON:", data);
-    } catch (e) {
-        console.log("Mottatt Tekst:", event.data);
-    }
-};
+
 
 socket.onclose = function(event) {
     // Handle connection close
@@ -59,27 +51,25 @@ function changeSetting(settingName, value) {
 socket.onmessage = function(event) {
     try {
         const parsedMsg = JSON.parse(event.data);
+        console.log("Mottatt JSON:", parsedMsg);
 
-        // Hvis vi får innstillinger fra Node.js
         if (parsedMsg.kommando === "currentSettings") {
             const data = parsedMsg.data;
-
-            // Oppdater verdiene på selve slideren
+            // Oppdater verdiene på slider
             movementTrigSensitivity.value = data.movementTrigSensitivity;
             distance.value = data.distance;
             maxLightStrength.value = data.maxLightStrength;
             standbyLightStrength.value = data.standbyLightStrength;
 
-            // Oppdater teksten (<output>) ved siden av slideren
+            // Oppdater output
             movementTrigSensitivity.nextElementSibling.value = data.movementTrigSensitivity;
             distance.nextElementSibling.value = data.distance;
             maxLightStrength.nextElementSibling.value = data.maxLightStrength;
             standbyLightStrength.nextElementSibling.value = data.standbyLightStrength;
 
-            console.log("Sliderne er oppdatert med verdier fra Arduino!");
         }
     } catch (e) {
-        // Hvis meldingen ikke er JSON (f.eks "Mottatt")
-        console.log("Server melding:", event.data);
+
+        console.log("Mottatt Tekst:", event.data);
     }
 };
