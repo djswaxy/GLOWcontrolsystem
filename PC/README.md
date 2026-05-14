@@ -1,8 +1,8 @@
 # GLOWcontrolsystem
 
-// LØPENDE TODO:
-* enten implementer 12/24  
-* WEBsocket send 24hr stat fra backend handle24HrSensorData(packet) -> frontend
+// TODO:
+*ACCEPTTEST*
+
 
 **Required NPM Packages**<br>
 *hvis du ikke er stor fan av npm, så rip*<br>
@@ -11,13 +11,17 @@
 ```npm install serialport```
 
 **USER MANUAL**
-*1.* Find corresponding COM port for your machine by running ```node COMPORTFINDER.js```<br>
-*2.* Run ```node PC/global.js```<br>
-*3.* Open the browser and go to ```localhost:6969```<br>
+*1.* Find corresponding COM port for your machine by running ```node COMPORTFINDER.js```<br> (eller samme som com porten i VS code)
+*2* Set correct COM Port at the top of "global.js" - Veldig viktig!!
+*2.* Run ```node PC/global.js```<br>(eller bare global.js hvis du er cd'd i PC folder)
+*3.* Open the "index.html" file in a browser of your choice <br>
 *4.* Enjoy!
 
-<img width="2372" height="1247" alt="image" src="https://github.com/user-attachments/assets/bb519756-78ab-446a-af4b-0956a432c3f8" />
-<img width="2383" height="1373" alt="image" src="https://github.com/user-attachments/assets/5b080379-3d4b-4153-a3b6-cd65e833da0a" />
-<img width="2386" height="1363" alt="image" src="https://github.com/user-attachments/assets/413aa29d-f9e7-476f-aad1-8125bbd9a4c2" />
-<img width="1116" height="1179" alt="image" src="https://github.com/user-attachments/assets/e52ed40c-56ec-4ff8-8955-ccc1c3402b00" />
-<img width="1644" height="1200" alt="image" src="https://github.com/user-attachments/assets/a27b2d09-8ca6-4dcc-85c6-67c875e3533e" />
+PS: i webstorm/vs code der du skriver inn node global.js kommer det masse info om man trenger, noen ganger for å endre settings må du refreshe siden hvis du ikke er koblet til websocketen.
+
+
+<img width="2399" height="1378" alt="image" src="https://github.com/user-attachments/assets/aa457a10-d306-44ca-8f4c-2ecad9cd4b22" />
+<img width="1646" height="1017" alt="image" src="https://github.com/user-attachments/assets/e8604850-a5dc-4d05-a1c0-18e806330535" />
+<img width="2387" height="1284" alt="image" src="https://github.com/user-attachments/assets/8ece3774-3463-4307-bfa7-f7e753797820" />
+<img width="2361" height="1360" alt="image" src="https://github.com/user-attachments/assets/08844cca-6f3f-466c-b1db-7b07aed4bbdd" />
+
