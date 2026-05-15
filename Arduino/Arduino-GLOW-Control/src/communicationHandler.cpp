@@ -145,6 +145,7 @@ void Receiver() {
             Parrot();
             break;    
     }
+    // VELDIG VIKTIG: Nullstill alt slik at Arduinoen er klar for neste pakke!
     ClearReceivedMessage();
 }
 

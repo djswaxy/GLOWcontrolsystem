@@ -7,7 +7,7 @@
 #include <motionSensor.h> //LESE SENSORER
 #include "LEDDriver.h"
 
-LEDDriver leds[] = { LEDDriver(2), LEDDriver(3), LEDDriver(4), LEDDriver(5), LEDDriver(6) };
+LEDDriver leds[] = { LEDDriver(8), LEDDriver(9), LEDDriver(10), LEDDriver(11), LEDDriver(12) };
 const int numLeds = 5;
 extern volatile unsigned char packet_received;
 
@@ -34,6 +34,18 @@ struct {
   unsigned char DATA[8] = {0xCC, 0xCC, 0xCC, 0x00, 0x00, 0x00, 0x00, 0x00};
 } connectToPC;
 
+typedef struct {
+  int sensorIndex;
+  int ledIndex;
+  bool active;
+  unsigned long activeTime;
+} SensorLightModule_t;
+
+SensorLightModule_t sensorLights[] = {
+  {2, 0, false, 0},
+  {1, 1, false, 0},
+  {0, 2, false, 0}
+};
 
 void setup() {
   initLEDport();
@@ -48,43 +60,29 @@ void setup() {
 
 void loop() {
 
-  if (packet_received == 1) {
-      
+  if (packet_received == 1) { 
       // Kjør logikken for å tolke hva Node.js nettopp sendte oss
-      Receiver();               
+      Receiver();
       
-      // VELDIG VIKTIG: Nullstill alt slik at Arduinoen er klar for neste pakke!
-      ClearReceivedMessage();   
+      ClearReceivedMessage();
   }
   bool motionNow = false;
   for (int i = 0; i < 3; i++) {
-      if (motionDetected(i)) {
-          motionNow = true;
-          break; // break på at en sensor detecter bevegelse
+      if (motionDetected(sensorLights[i].sensorIndex)) {
+        sensorLights[i].activeTime = millis(); //millis er stoppeklokke
+        if (!sensorLights[i].active) {
+          sensorLights[i].active = true;
+          leds[sensorLights[i].ledIndex].goActive();
+        }
+        // Legg til i stats
+        PasserbyDay++;
+        PasserbyWeek++;
+        PasserbyAllTime++;
+        saveStats();
+      }
+      if (sensorLights[i].active && (millis() - sensorLights[i].activeTime >= LIGHT_DURATION_MS)) {
+          leds[sensorLights[i].ledIndex].goStandby();
+          sensorLights[i].active = false;
       }
   }
-  if (motionNow) {
-      lastMotionTime = millis(); //millis er stoppeklokke
-
-      if (!isLightActive) { //skru på lys
-          for (int i = 0; i < numLeds; i++) {
-              leds[i].goActive();
-          }
-          isLightActive = true;
-
-          // Legg til i stats
-          PasserbyDay++;
-          PasserbyWeek++;
-          PasserbyAllTime++;
-          saveStats();
-      }
-  }
-  if (isLightActive && (millis() - lastMotionTime >= LIGHT_DURATION_MS)) {
-      
-      for (int i = 0; i < numLeds; i++) {
-          leds[i].goStandby();
-      }
-      isLightActive = false;
-  }
-
 }
