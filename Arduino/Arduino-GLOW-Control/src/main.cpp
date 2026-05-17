@@ -37,14 +37,15 @@ struct {
 typedef struct {
   int sensorIndex;
   int ledIndex;
+  int adjacentLedIndex[2];
   bool active;
   unsigned long activeTime;
 } SensorLightModule_t;
 
 SensorLightModule_t sensorLights[] = {
-  {2, 0, false, 0},
-  {1, 1, false, 0},
-  {0, 2, false, 0}
+  {0, 0, {1, -1}, false, 0},
+  {1, 2, {1, 3}, false, 0},
+  {2, 4, {3, -1}, false, 0}
 };
 
 void setup() {
@@ -73,6 +74,11 @@ void loop() {
         if (!sensorLights[i].active) {
           sensorLights[i].active = true;
           leds[sensorLights[i].ledIndex].goActive();
+          for (int j = 0; j < 2; j++) {
+            if (sensorLights[i].adjacentLedIndex[j] != -1) {
+              leds[sensorLights[i].adjacentLedIndex[j]].goActive();
+            }
+          }
         }
         // Legg til i stats
         PasserbyDay++;
@@ -81,8 +87,14 @@ void loop() {
         saveStats();
       }
       if (sensorLights[i].active && (millis() - sensorLights[i].activeTime >= LIGHT_DURATION_MS)) {
-          leds[sensorLights[i].ledIndex].goStandby();
-          sensorLights[i].active = false;
+        sensorLights[i].active = false;
+        leds[sensorLights[i].ledIndex].goStandby();
+        for (int j = 0; j < 2; j++) {
+          if (sensorLights[i].adjacentLedIndex[j] == -1) continue;
+          if (!sensorLights[sensorLights[i].adjacentLedIndex[j] - 1].active && !sensorLights[sensorLights[i].adjacentLedIndex[j] + 1].active) {
+              leds[sensorLights[i].adjacentLedIndex[j]].goStandby();
+          }
+        }
       }
   }
 }
