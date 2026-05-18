@@ -9,7 +9,7 @@ let currentSettings = {
 const WebSocket = require('ws');
 const { SerialPort } = require('serialport');
 let port = new SerialPort({
-    path: 'COM7', // Husk å sjekke at dette er riktig port
+    path: 'COM5', // Husk å sjekke at dette er riktig port
     baudRate: 9600
 });
 
@@ -36,10 +36,10 @@ function sendPacket(packetArray) {
     console.log(`${Colors.dim}[SENDTE PAKKE ->]: 0x${formattedHex}${Colors.reset}`);
 }
 function connectToArduino() {
-    console.log(`${Colors.yellow}Søker etter Arduino på COM7...${Colors.reset}`);
+    console.log(`${Colors.yellow}Søker etter Arduino på COM5...${Colors.reset}`);
 
     port = new SerialPort({
-        path: 'COM7',
+        path: 'COM5',
         baudRate: 9600
     }, function (err) {
         if (err) {
