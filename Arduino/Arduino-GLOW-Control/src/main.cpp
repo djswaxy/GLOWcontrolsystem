@@ -67,34 +67,49 @@ void loop() {
       
       ClearReceivedMessage();
   }
-  bool motionNow = false;
+  
+  // This is a map for the desired light state. The map is to prevent accidental light turn offs
+  bool targetedLightMap[numLeds] = {false};
+
+  // Going through the 3 sensors
   for (int i = 0; i < 3; i++) {
-      if (motionDetected(sensorLights[i].sensorIndex)) {
-        sensorLights[i].activeTime = millis(); //millis er stoppeklokke
-        if (!sensorLights[i].active) {
-          sensorLights[i].active = true;
-          leds[sensorLights[i].ledIndex].goActive();
-          for (int j = 0; j < 2; j++) {
-            if (sensorLights[i].adjacentLedIndex[j] != -1) {
-              leds[sensorLights[i].adjacentLedIndex[j]].goActive();
-            }
-          }
-        }
-        // Legg til i stats
-        PasserbyDay++;
-        PasserbyWeek++;
-        PasserbyAllTime++;
-        saveStats();
+    // If motion is detected, turn on light and restart its timer.
+    if (motionDetected(sensorLights[i].sensorIndex)) {
+      sensorLights[i].activeTime = millis(); //millis er stoppeklokke
+      if (!sensorLights[i].active) {
+        sensorLights[i].active = true;
       }
-      if (sensorLights[i].active && (millis() - sensorLights[i].activeTime >= LIGHT_DURATION_MS)) {
-        sensorLights[i].active = false;
-        leds[sensorLights[i].ledIndex].goStandby();
-        for (int j = 0; j < 2; j++) {
-          if (sensorLights[i].adjacentLedIndex[j] == -1) continue;
-          if (!sensorLights[sensorLights[i].adjacentLedIndex[j] - 1].active && !sensorLights[sensorLights[i].adjacentLedIndex[j] + 1].active) {
-              leds[sensorLights[i].adjacentLedIndex[j]].goStandby();
-          }
+      // Legg til i stats
+      PasserbyDay++;
+      PasserbyWeek++;
+      PasserbyAllTime++;
+      saveStats();
+    }
+    // If timer is at 0, turn of light
+    if (sensorLights[i].active && (millis() - sensorLights[i].activeTime >= LIGHT_DURATION_MS)) {
+      sensorLights[i].active = false;
+    }
+
+    // If timer is still active, set the targeted state for the light and the adjacent lights.
+    if (sensorLights[i].active) {
+      targetedLightMap[sensorLights[i].ledIndex] = true;
+      for (int j = 0; j < 2; j++) {
+        if (sensorLights[i].adjacentLedIndex[j] != -1) {
+          targetedLightMap[sensorLights[i].adjacentLedIndex[j]] = true;
         }
       }
+    }
+  }
+
+  // Controlling the light, by turning them on and off bases of on their current state and their targeted state.
+  static bool currentLightMap[numLeds] = {false}; //static to not change the value on loop reset
+  for (int i = 0; i < numLeds; i++) {
+    if (targetedLightMap[i] && !currentLightMap[i]) {
+      currentLightMap[i] = true;
+      leds[i].goActive();
+    } else if (!targetedLightMap[i] && currentLightMap[i]) {
+      currentLightMap[i] = false;
+      leds[i].goStandby();
+    }
   }
 }
