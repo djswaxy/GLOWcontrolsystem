@@ -1,7 +1,7 @@
 #include "LightSensor.h"
 
 LightSensor::LightSensor() 
-    : tsl_(2591), luxThreshold_(50.0) {}
+    : tsl_(2591), luxThreshold_(40.0) {}
 
 bool LightSensor::init() {
     if (!tsl_.begin()) {

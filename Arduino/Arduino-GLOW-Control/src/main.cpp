@@ -6,6 +6,7 @@
 #include <settings.h>
 #include <motionSensor.h> //LESE SENSORER
 #include "LEDDriver.h"
+#include "LightSensor.h"
 
 LEDDriver leds[] = { LEDDriver(8), LEDDriver(9), LEDDriver(10), LEDDriver(11), LEDDriver(12) };
 const int numLeds = 5;
@@ -18,6 +19,11 @@ extern unsigned int PasserbyAllTime;
 unsigned long lastMotionTime = 0; 
 const unsigned long LIGHT_DURATION_MS = 5000; // Lengde lys er tent
 bool isLightActive = false;
+
+LightSensor ambientLightSensor;
+int luxThreshold = 40;
+
+
 
 void applyLightSettings(unsigned short maxPercent, unsigned short standbyPercent) {
     for (int i = 0; i < numLeds; i++) {
@@ -56,6 +62,8 @@ void setup() {
   TransmitData(connectToPC.ID,connectToPC.DATA); 
   getSettings();
   saveSettings();
+  ambientLightSensor.init();
+  ambientLightSensor.setSensitivity(luxThreshold);
   toggleLED(5);
 }
 
@@ -68,48 +76,64 @@ void loop() {
       ClearReceivedMessage();
   }
   
-  // This is a map for the desired light state. The map is to prevent accidental light turn offs
-  bool targetedLightMap[numLeds] = {false};
-
-  // Going through the 3 sensors
-  for (int i = 0; i < 3; i++) {
-    // If motion is detected, turn on light and restart its timer.
-    if (motionDetected(sensorLights[i].sensorIndex)) {
-      sensorLights[i].activeTime = millis(); //millis er stoppeklokke
-      if (!sensorLights[i].active) {
-        sensorLights[i].active = true;
+  int currentLux = ambientLightSensor.getLux();
+  if (currentLux != -1 && currentLux >= luxThreshold) {
+    for (int i = 0; i < numLeds; i++) {
+      leds[i].setBrightness(0);
+    }
+    isLightActive = false;
+  }
+  else if (currentLux != -1 && currentLux < luxThreshold && !isLightActive) {
+    for (int i = 0; i < numLeds; i++) {
+      leds[i].goStandby();
+    }
+    isLightActive = true;
+  }
+  if (isLightActive) {
+    // This is a map for the desired light state. The map is to prevent accidental light turn offs
+    bool targetedLightMap[numLeds] = {false};
+  
+    // Going through the 3 sensors
+    for (int i = 0; i < 3; i++) {
+      // If motion is detected, turn on light and restart its timer.
+      if (motionDetected(sensorLights[i].sensorIndex)) {
+        sensorLights[i].activeTime = millis(); //millis er stoppeklokke
+        if (!sensorLights[i].active) {
+          sensorLights[i].active = true;
+        }
+        // Legg til i stats
+        PasserbyDay++;
+        PasserbyWeek++;
+        PasserbyAllTime++;
+        saveStats();
       }
-      // Legg til i stats
-      PasserbyDay++;
-      PasserbyWeek++;
-      PasserbyAllTime++;
-      saveStats();
-    }
-    // If timer is at 0, turn of light
-    if (sensorLights[i].active && (millis() - sensorLights[i].activeTime >= LIGHT_DURATION_MS)) {
-      sensorLights[i].active = false;
-    }
-
-    // If timer is still active, set the targeted state for the light and the adjacent lights.
-    if (sensorLights[i].active) {
-      targetedLightMap[sensorLights[i].ledIndex] = true;
-      for (int j = 0; j < 2; j++) {
-        if (sensorLights[i].adjacentLedIndex[j] != -1) {
-          targetedLightMap[sensorLights[i].adjacentLedIndex[j]] = true;
+      // If timer is at 0, turn of light
+      if (sensorLights[i].active && (millis() - sensorLights[i].activeTime >= LIGHT_DURATION_MS)) {
+        sensorLights[i].active = false;
+      }
+  
+      // If timer is still active, set the targeted state for the light and the adjacent lights.
+      if (sensorLights[i].active) {
+        targetedLightMap[sensorLights[i].ledIndex] = true;
+        for (int j = 0; j < 2; j++) {
+          if (sensorLights[i].adjacentLedIndex[j] != -1) {
+            targetedLightMap[sensorLights[i].adjacentLedIndex[j]] = true;
+          }
         }
       }
     }
-  }
-
-  // Controlling the light, by turning them on and off bases of on their current state and their targeted state.
-  static bool currentLightMap[numLeds] = {false}; //static to not change the value on loop reset
-  for (int i = 0; i < numLeds; i++) {
-    if (targetedLightMap[i] && !currentLightMap[i]) {
-      currentLightMap[i] = true;
-      leds[i].goActive();
-    } else if (!targetedLightMap[i] && currentLightMap[i]) {
-      currentLightMap[i] = false;
-      leds[i].goStandby();
+  
+    // Controlling the light, by turning them on and off bases of on their current state and their targeted state.
+    static bool currentLightMap[numLeds] = {false}; //static to not change the value on loop reset
+    for (int i = 0; i < numLeds; i++) {
+      if (targetedLightMap[i] && !currentLightMap[i]) {
+        currentLightMap[i] = true;
+        leds[i].goActive();
+      } else if (!targetedLightMap[i] && currentLightMap[i]) {
+        currentLightMap[i] = false;
+        leds[i].goStandby();
+      }
     }
+
   }
 }
