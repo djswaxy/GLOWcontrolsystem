@@ -17,7 +17,7 @@ extern unsigned int PasserbyWeek;
 extern unsigned int PasserbyAllTime;
 
 unsigned long lastMotionTime = 0; 
-const unsigned long LIGHT_DURATION_MS = 5000; // Lengde lys er tent
+unsigned int LIGHT_DURATION_S = 5; // Lengde lys er tent
 bool isLightActive = false;
 
 LightSensor ambientLightSensor;
@@ -70,10 +70,8 @@ void setup() {
 void loop() {
 
   if (packet_received == 1) { 
-      // Kjør logikken for å tolke hva Node.js nettopp sendte oss
+      // kjør recieve fra nodejs
       Receiver();
-      
-      ClearReceivedMessage();
   }
   
   int currentLux = ambientLightSensor.getLux();
@@ -108,7 +106,7 @@ void loop() {
         saveStats();
       }
       // If timer is at 0, turn of light
-      if (sensorLights[i].active && (millis() - sensorLights[i].activeTime >= LIGHT_DURATION_MS)) {
+      if (sensorLights[i].active && (millis() - sensorLights[i].activeTime >= LIGHT_DURATION_S*1000UL)) {
         sensorLights[i].active = false;
       }
   

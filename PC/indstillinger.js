@@ -7,9 +7,11 @@ const maxLightStrength = document.getElementById("maxLightStrength");
 const standbyLightStrength = document.getElementById("standbyLightStrength");
 const changeSettingBtn = document.getElementById("changeSettingBtn");
 const fetchCurrentSettingsBtn = document.getElementById("fetchCurrentSettingsBtn");
+const lightDurationSlider = document.getElementById("lightDurationSlider");
 changeSettingBtn.addEventListener('click', () => {
     // 1. Samle alle verdier og gjør dem om til tall (parseInt)
     const nyeInnstillinger = {
+        lightDuration: parseInt(lightDurationSlider.value, 10),
         movementTrigSensitivity: parseInt(movementTrigSensitivity.value, 10),
         distance: parseInt(distance.value, 10),
         maxLightStrength: parseInt(maxLightStrength.value, 10),
@@ -56,12 +58,14 @@ socket.onmessage = function(event) {
         if (parsedMsg.kommando === "currentSettings") {
             const data = parsedMsg.data;
             // Oppdater verdiene på slider
+            lightDurationSlider.value = data.lightDuration;
             movementTrigSensitivity.value = data.movementTrigSensitivity;
             distance.value = data.distance;
             maxLightStrength.value = data.maxLightStrength;
             standbyLightStrength.value = data.standbyLightStrength;
 
             // Oppdater output
+            lightDurationSlider.nextElementSibling.value = data.lightDuration;
             movementTrigSensitivity.nextElementSibling.value = data.movementTrigSensitivity;
             distance.nextElementSibling.value = data.distance;
             maxLightStrength.nextElementSibling.value = data.maxLightStrength;

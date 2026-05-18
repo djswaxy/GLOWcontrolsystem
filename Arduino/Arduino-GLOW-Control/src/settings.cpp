@@ -1,7 +1,7 @@
 #include <settings.h>
 #include <communicationHandler.h>
 #include <motionSensor.h>
-
+extern unsigned int LIGHT_DURATION_S;
 extern int maxDistance;
 extern int movementThreshold;
 extern void applyLightSettings(unsigned short maxPercent, unsigned short standbyPercent);
@@ -23,7 +23,8 @@ void getSettings() {
     EEPROM.get(2, dist);
     EEPROM.get(4, standbyLight);
     EEPROM.get(6, activeLight);
-    
+    EEPROM.get(18, LIGHT_DURATION_S); 
+    if (LIGHT_DURATION_S == 0xFFFF || LIGHT_DURATION_S == 0) LIGHT_DURATION_S = 5; // safety check
    
     setMovementThreshold(mvtSensor);
     setDistance(dist);
@@ -42,7 +43,7 @@ void getStats() {
 void sendSettings() {
     unsigned char commandID = 0xAC;
     unsigned char commandDATA[8] = {
-        (unsigned char)(mvtSensor >> 8), 
+        (unsigned char)(LIGHT_DURATION_S), 
         (unsigned char)(mvtSensor), 
         (unsigned char)(dist >> 8), 
         (unsigned char)(dist),
@@ -60,6 +61,7 @@ void saveSettings() {
     EEPROM.put(2, dist);
     EEPROM.put(4, standbyLight);
     EEPROM.put(6, activeLight);
+    EEPROM.put(18, LIGHT_DURATION_S);
 }
 void saveStats() {
     EEPROM.put(8, PasserbyDay);

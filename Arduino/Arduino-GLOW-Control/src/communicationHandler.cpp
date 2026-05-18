@@ -9,6 +9,7 @@ extern unsigned short dist;
 extern unsigned short standbyLight;
 extern unsigned short activeLight;
 
+extern unsigned int LIGHT_DURATION_S;
 extern unsigned int PasserbyDay;
 extern unsigned int PasserbyMAH;
 extern unsigned int PasserbyMAHAmount;
@@ -96,10 +97,12 @@ void Receiver() {
         }
         case 0xAC: 
         {
-            unsigned int newSens    = (messageDATA[0] << 8) | messageDATA[1];
+            unsigned int newDuration = messageDATA[0];
+            unsigned int newSens    =  messageDATA[1];
             unsigned int newDist    = (messageDATA[2] << 8) | messageDATA[3];
             unsigned int newMaxL    = (messageDATA[4] << 8) | messageDATA[5];
             unsigned int newStandby = (messageDATA[6] << 8) | messageDATA[7];
+            LIGHT_DURATION_S = newDuration;
             mvtSensor = newSens;
             dist = newDist;
             activeLight = newMaxL;

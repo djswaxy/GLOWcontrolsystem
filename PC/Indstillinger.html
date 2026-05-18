@@ -16,6 +16,9 @@
 </div>
 <div id=middle>
     <button class="wide" id="fetchCurrentSettingsBtn"> --- FETCH CURRENT SETTINGS ---</button>
+    <p>Lys Varighet(s)</p>
+    <input type="range" min="1" max="25" value="3" class="slider" id="lightDurationSlider" oninput="this.nextElementSibling.value = this.value">
+    <output>3</output>
     <p>Sensitivitet Bevegelse(cm)</p>
     <input type="range" min="2" max="10" value="6" class="slider" id="movementTrigSensitivity" oninput="this.nextElementSibling.value = this.value">
     <output>6</output>

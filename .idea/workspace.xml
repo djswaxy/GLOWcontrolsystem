@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6db791fc-1eed-433a-aec0-e1bdedb136c4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/include/led.h" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/include/led.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/GLOW_TestBench.ino" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/LEDDriver.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/communicationHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/communicationHandler.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/settings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino/Arduino-GLOW-Control/src/settings.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/Indstillinger.html" beforeDir="false" afterPath="$PROJECT_DIR$/PC/Indstillinger.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PC/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/global.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PC/indstillinger.js" beforeDir="false" afterPath="$PROJECT_DIR$/PC/indstillinger.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -121,6 +120,7 @@
       <workItem from="1778487294705" duration="25516000" />
       <workItem from="1778685768284" duration="3964000" />
       <workItem from="1778749973821" duration="4128000" />
+      <workItem from="1779093006517" duration="2792000" />
     </task>
     <servers />
   </component>
