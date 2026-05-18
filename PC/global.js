@@ -8,10 +8,7 @@ let currentSettings = {
 };
 const WebSocket = require('ws');
 const { SerialPort } = require('serialport');
-let port = new SerialPort({
-    path: 'COM5', // Husk å sjekke at dette er riktig port
-    baudRate: 9600
-});
+let port;
 
 const ConnAcknowledge = new Uint8Array([0xAA, 0xEE, 0xEE, 0xEE, 0xEE, 0x00, 0x00, 0x00, 0x00, 0x00, 0xBB]);
 const AskForSensorData = new Uint8Array([0xAA, 0xAB, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xBB]);
@@ -49,10 +46,17 @@ function connectToArduino() {
         }
     });
 
-    // Når porten åpner seg (Arduino er plugget i)
+
     port.on('open', async () => {
         console.log(`${Colors.bgGreen}${Colors.black} [ USB TILKOBLET ] Port opened successfully! ${Colors.reset}`);
         rxBuffer = []; // Tøm gammelt rusk fra forrige tilkobling
+
+        setTimeout(() => {
+            if (port && port.isOpen) {
+                console.log(`${Colors.cyan}Sjekker om Arduino er våken... Henter innstillinger!${Colors.reset}`);
+                sendPacket(AskForCurrentSettings);
+            }
+        }, 2000);
     });
 
     // Innkommende data fra Arduino
@@ -216,40 +220,7 @@ function handleConnection() {
 // delay funksjon
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-// En global liste (samleboks) for å holde på innkommende data
-let rxBuffer = [];
-let isSending = false;
-port.on('data', (data) => {
-    // 1. Samle data i buffer (som før)
-    for (let i = 0; i < data.length; i++) rxBuffer.push(data[i]);
 
-    while (rxBuffer.length >= 11) {
-        if (rxBuffer[0] !== 0xAA) {
-            rxBuffer.shift();
-            continue;
-        }
-
-        if (rxBuffer[10] === 0xBB) {
-            const packet = rxBuffer.splice(0, 11); //putter inkommende 6 bytes i en array
-            // SEND PAKKEN TIL EN EGEN FUNKSJON
-            handleIncomingPacket(packet);
-        } else {
-            rxBuffer.shift();
-        }
-    }
-});
-
-
-// 4. Vent til porten er åpen, og start funksjonen
-port.on('open', async () => {
-    console.log('Port opened successfully!');
-
-
-});
-
-port.on('error', (err) => {
-    console.error('Serial Port Error: ', err.message);
-});
 
 
 // --- WEBSOCKET SERVER ---
