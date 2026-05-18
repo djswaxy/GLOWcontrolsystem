@@ -8,7 +8,7 @@ let currentSettings = {
 };
 const WebSocket = require('ws');
 const { SerialPort } = require('serialport');
-const port = new SerialPort({
+let port = new SerialPort({
     path: 'COM7', // Husk å sjekke at dette er riktig port
     baudRate: 9600
 });
@@ -19,6 +19,10 @@ const AskForCurrentSettings = new Uint8Array([0xAA, 0xAD, 0x00, 0x00, 0x00, 0x00
 
 function sendPacket(packetArray) {
     // 1. Lag en rå buffer (ekte bytes)
+    if (!port || !port.isOpen) { //stopp send hvis ikke koblet til
+        console.log(`${Colors.bgRed}${Colors.white} Feil: Prøver å sende data, men Arduinoen er ikke tilkoblet! ${Colors.reset}`);
+        return;
+    }
     const bufferToSend = Buffer.from(packetArray);
 
     // 2. Send DE RÅ BYTENE over porten, ikke teksten!
@@ -30,6 +34,58 @@ function sendPacket(packetArray) {
     const hexString = bufferToSend.toString('hex').toUpperCase();
     const formattedHex = hexString.match(/.{1,2}/g).join(' ');
     console.log(`${Colors.dim}[SENDTE PAKKE ->]: 0x${formattedHex}${Colors.reset}`);
+}
+function connectToArduino() {
+    console.log(`${Colors.yellow}Søker etter Arduino på COM7...${Colors.reset}`);
+
+    port = new SerialPort({
+        path: 'COM7',
+        baudRate: 9600
+    }, function (err) {
+        if (err) {
+            // Hvis COM7 ikke finnes, prøv igjen om 3 sekunder
+            console.log(`${Colors.dim}Finner ikke enheten, prøver på nytt om 3 sekunder...${Colors.reset}`);
+            setTimeout(connectToArduino, 3000);
+        }
+    });
+
+    // Når porten åpner seg (Arduino er plugget i)
+    port.on('open', async () => {
+        console.log(`${Colors.bgGreen}${Colors.black} [ USB TILKOBLET ] Port opened successfully! ${Colors.reset}`);
+        rxBuffer = []; // Tøm gammelt rusk fra forrige tilkobling
+    });
+
+    // Innkommende data fra Arduino
+    port.on('data', (data) => {
+        for (let i = 0; i < data.length; i++) rxBuffer.push(data[i]);
+
+        while (rxBuffer.length >= 11) {
+            if (rxBuffer[0] !== 0xAA) {
+                rxBuffer.shift();
+                continue;
+            }
+
+            if (rxBuffer[10] === 0xBB) {
+                const packet = rxBuffer.splice(0, 11);
+                handleIncomingPacket(packet);
+            } else {
+                rxBuffer.shift();
+            }
+        }
+    });
+
+    // Håndter feilmeldinger
+    port.on('error', (err) => {
+        console.error(`${Colors.red}Serial Port Error: ${err.message}${Colors.reset}`);
+    });
+
+    // NÅR KABELEN TREKKES UT:
+    port.on('close', () => {
+        console.log(`\n${Colors.bgRed}${Colors.white} [ USB FRAKOBLET ] Sammenkobling med Arduino brutt! Venter på ny enhet... ${Colors.reset}\n`);
+
+        // Vent 3 sekunder og begynn å lete etter Arduinoen igjen
+        setTimeout(connectToArduino, 3000);
+    });
 }
 
 async function handleIncomingPacket(packet) {
@@ -281,3 +337,4 @@ const Colors = {
     bgBlue: "\x1b[44m",
     bgMagenta: "\x1b[45m"
 };
+connectToArduino();
