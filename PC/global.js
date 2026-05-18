@@ -166,7 +166,7 @@ function handleBulkSettingResponse(packet) {
     currentSettings.distance = dist;
     currentSettings.maxLightStrength = maxL;
     currentSettings.standbyLightStrength = standby;
-    console.log(`${Colors.cyan}0. Lys Varighet (Standbyperiode)  : ${Colors.bright}${sens}${Colors.reset}`);
+    console.log(`${Colors.cyan}0. Lys Varighet (Standbyperiode)  : ${Colors.bright}${duration}${Colors.reset}`);
     console.log(`${Colors.cyan}1. Følsomhet (Sens)  : ${Colors.bright}${sens}${Colors.reset}`);
     console.log(`${Colors.cyan}2. Bevegelse Distance  : ${Colors.bright}${dist}${Colors.reset}`);
     console.log(`${Colors.cyan}1. Max Lys   : ${Colors.bright}${maxL}${Colors.reset}`);
