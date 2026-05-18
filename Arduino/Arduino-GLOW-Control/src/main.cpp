@@ -82,6 +82,8 @@ void loop() {
     isLightActive = false;
   }
   else if (currentLux != -1 && currentLux < luxThreshold && !isLightActive) {
+    unsigned char luxdata[8] = {currentLux};
+    TransmitData(0x66, luxdata);
     for (int i = 0; i < numLeds; i++) {
       leds[i].goStandby();
     }
@@ -89,7 +91,7 @@ void loop() {
   }
   if (isLightActive) {
     // This is a map for the desired light state. The map is to prevent accidental light turn offs
-    bool targetedLightMap[numLeds] = {false};
+    bool targetedLightMap[numLeds] = {false, false, false, false, false};
   
     // Going through the 3 sensors
     for (int i = 0; i < 3; i++) {
@@ -122,7 +124,7 @@ void loop() {
     }
   
     // Controlling the light, by turning them on and off bases of on their current state and their targeted state.
-    static bool currentLightMap[numLeds] = {false}; //static to not change the value on loop reset
+    static bool currentLightMap[numLeds] = {false, false, false, false, false}; //static to not change the value on loop reset
     for (int i = 0; i < numLeds; i++) {
       if (targetedLightMap[i] && !currentLightMap[i]) {
         currentLightMap[i] = true;
@@ -132,6 +134,5 @@ void loop() {
         leds[i].goStandby();
       }
     }
-
   }
 }
