@@ -7,9 +7,7 @@
     src: url('PC/Homme.ttf');
 }
 html {
-    margin: 0;
     height: 100%;
-    overflow: hidden;
 }
 body {
     background-color: #8494FF;
